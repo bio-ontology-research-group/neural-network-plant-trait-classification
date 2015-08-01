@@ -1,1 +1,1 @@
-# Neural-Network-Plant-Trait-Classifications
+# neural-network-plant-trait-classification
