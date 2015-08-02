@@ -1,3 +1,5 @@
+# Fairly simple file that only returns flowering photographs.
+
 import csv
 
 with open("./output.csv", "rb") as traitsf:
