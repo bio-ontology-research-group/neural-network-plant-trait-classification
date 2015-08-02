@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.deeplearning4j:deeplearning4j-nlp:0.0.3.3.5.alpha2-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/deeplearning4j/deeplearning4j-nlp/0.0.3.3.5.alpha2-SNAPSHOT/deeplearning4j-nlp-0.0.3.3.5.alpha2-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/deeplearning4j/deeplearning4j-nlp/0.0.3.3.5.alpha2-SNAPSHOT/deeplearning4j-nlp-0.0.3.3.5.alpha2-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/deeplearning4j/deeplearning4j-nlp/0.0.3.3.5.alpha2-SNAPSHOT/deeplearning4j-nlp-0.0.3.3.5.alpha2-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
