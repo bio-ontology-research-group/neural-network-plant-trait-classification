@@ -88,7 +88,7 @@ public class Base {
 
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
                 .layer(new RBM())
-                .list(3)
+                .list(2)
                 .layer(0, new RBM.Builder().nIn(numInput).nOut(1600).build())
                 .layer(1, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).nIn(1600).nOut(labels.size()).activation("softmax").build())
                 .build();
