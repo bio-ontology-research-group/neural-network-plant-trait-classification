@@ -9,12 +9,15 @@ import org.deeplearning4j.datasets.iterator.impl.ListDataSetIterator;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
+import org.deeplearning4j.nn.conf.layers.OutputLayer;
+import org.deeplearning4j.nn.conf.layers.RBM;
 import org.deeplearning4j.optimize.api.IterationListener;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.SplitTestAndTrain;
 import org.nd4j.linalg.factory.Nd4j;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
+import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.slf4j.Logger;
 import org.nd4j.linalg.dataset.DataSet;
 import org.slf4j.LoggerFactory;
@@ -42,6 +45,10 @@ public class Base {
         int numInputCols = 200;
         int numImages = 6001;
         List<String> labels = new ArrayList<>();
+
+        // Paramters for neural net configuration.
+        int numInput = numInputRows * numInputCols;
+
 
         // Parameters for training/evaluation
         final int numEpochs = 10;
@@ -74,15 +81,24 @@ public class Base {
 
         RecordReader recordReader = new ImageRecordReader(numInputRows, numInputCols, true);
         recordReader.initialize(new FileSplit(new File(labeledPath)));
-        DataSetIterator dataSetIterator = new RecordReaderDataSetIterator(recordReader, numImages, numInputCols * numInputCols, labels.size());
+        DataSetIterator dataSetIterator = new RecordReaderDataSetIterator(recordReader, numImages, numInput, labels.size());
         Nd4j.ENFORCE_NUMERICAL_STABILITY = true;
 
         log.info("Building model");
 
-        MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder().build();
+        MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
+                .layer(new RBM())
+                .list(3)
+                .layer(0, new RBM.Builder().nIn(numInput).nOut(1600).build())
+                .layer(1, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).nIn(1600).nOut(labels.size()).activation("softmax").build())
+                .build();
 
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(multiLayerConfiguration);
         multiLayerNetwork.init();
+
+        /* Print out error rate, good for troubleshooting as we're not going to want
+         * to constantly study the weights.
+         */
 
         multiLayerNetwork.setListeners(Collections.singletonList((IterationListener) new ScoreIterationListener(1)));
 
