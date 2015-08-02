@@ -24,27 +24,53 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by keiron on 02/08/15.
+
+/*
+ * Base.java
+ *
+ * Base java file for work. Use this as a template for experimentation.
  */
+
 public class Base {
     public static final Logger log = LoggerFactory.getLogger(Base.class);
 
     public static void main (String args []) throws Exception {
-        final int numInputRows = 200;
-        final int numInputCols = 200;
-        final int numImages = 6001;
+
+        // Parameters for loading data.
+        String labeledPath = System.getProperty("user.home")+"/path/to/directory";
+        int numInputRows = 200;
+        int numInputCols = 200;
+        int numImages = 6001;
+        List<String> labels = new ArrayList<>();
+
+        // Parameters for training/evaluation
         final int numEpochs = 10;
         final int miniBatchSize = 50;
+        Evaluation evaluation = new Evaluation();
 
         log.info("Loading labels");
-        String labeledPath = System.getProperty("user.home")+"/path/to/directory";
-        List<String> labels = new ArrayList<>();
         for(File f : new File(labeledPath).listFiles()) {
             labels.add(f.getName());
         }
 
         log.info("Loading data");
+
+        /*
+         * RecordReader: class from Canova (https://github.com/jpatanooga/Canova)
+         * that converts byte input that's orientated to a collection of elements that
+         * are a FIXED NUMBER and indexed with a UID. This process is requried to
+         * vectorise the data, of which every element is a feature.
+         *
+         * ImageRecordReader: a subclass of RecordREader and automatically takes
+         * 28x28 dimension images. We need to change the dimensions of this to match
+         * our images, of which we do in the 3rd parameter. We also feed in the labels
+         * to validate the neural net model results (the last parameter identifies that).
+         *
+         * DataSetIterator: a class that traverses through the RecordReader, and helps
+         * keep track of how many and what images have already been fed through the
+         * model. In this line, we are also converting the images into vectors of elements,
+         * opposed to a 28x28 matrix, and identify the number of labels.
+         */
 
         RecordReader recordReader = new ImageRecordReader(numInputRows, numInputCols, true);
         recordReader.initialize(new FileSplit(new File(labeledPath)));
@@ -77,13 +103,10 @@ public class Base {
 
         log.info("Evaluting model");
 
-        Evaluation evaluation = new Evaluation();
         DataSet testingData = splitTestAndTrain.getTest();
         INDArray predict = multiLayerNetwork.output(testingData.getFeatureMatrix());
 
         evaluation.eval(testingData.getLabels(), predict);
-
-
 
         log.info(evaluation.stats());
     }
