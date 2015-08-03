@@ -1,4 +1,4 @@
-package org.deeplearning4j.Project.FloweringAndNotFlowering;
+package org.deeplearning4j.Project;
 
 import org.canova.api.records.reader.RecordReader;
 import org.canova.api.split.FileSplit;
@@ -9,15 +9,11 @@ import org.deeplearning4j.datasets.iterator.impl.ListDataSetIterator;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
-import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.conf.layers.RBM;
-import org.deeplearning4j.optimize.api.IterationListener;
-import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.SplitTestAndTrain;
 import org.nd4j.linalg.factory.Nd4j;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
-import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.slf4j.Logger;
 import org.nd4j.linalg.dataset.DataSet;
 import org.slf4j.LoggerFactory;
@@ -34,14 +30,13 @@ public class FloweringAndNotFloweringSmallScale {
     public static final Logger log = LoggerFactory.getLogger(FloweringAndNotFloweringSmallScale.class);
 
     public static void main (String args[]) throws Exception {
-        String labeledPath = System.getProperty("user.home")+"/images/fanfs/";
+        String labeledPath = System.getProperty("user.home")+"/datasets/fanfsmall";
         int numInputRows = 350;
         int numInputCols = 350;
-        int numImages = 2000;
+        int numImages = 800;
         List<String> labels = new ArrayList<>();
 
         int numInput = numInputRows * numInputCols;
-        int numOut = labels.size();
 
         final int numEpochs = 10;
         final int miniBatchSize = 50;
@@ -56,7 +51,7 @@ public class FloweringAndNotFloweringSmallScale {
 
         RecordReader recordReader = new ImageRecordReader(numInputRows, numInputCols, true);
         recordReader.initialize(new FileSplit(new File(labeledPath)));
-        DataSetIterator dataSetIterator = new RecordReaderDataSetIterator(recordReader, numImages, numInput, numOut);
+        DataSetIterator dataSetIterator = new RecordReaderDataSetIterator(recordReader, numImages, numInput, labels.size());
         Nd4j.ENFORCE_NUMERICAL_STABILITY = true;
 
         log.info("Building model");
@@ -64,16 +59,16 @@ public class FloweringAndNotFloweringSmallScale {
         // A Bernoulli RBM
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
                 .layer(new RBM())
-                .nIn(numInput).nOut(numOut)
+                .nIn(numInput).nOut(labels.size())
                 .learningRate(0.06)
                 .iterations(20)
                 .visibleUnit(RBM.VisibleUnit.BINARY).hiddenUnit(RBM.HiddenUnit.BINARY)
-                .list(8).hiddenLayerSizes(1500,1250,1000,850,600,450,200,numOut).build();
+                .list(8).hiddenLayerSizes(1500,1250,1000,850,600,450,200,labels.size()).build();
 
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(multiLayerConfiguration);
         multiLayerNetwork.init();
 
-        log.info("Splitting dataset");
+        log.info("Splitting dataset - This may take awhile, depending on the input");
         DataSet allData =  dataSetIterator.next();
 
         SplitTestAndTrain splitTestAndTrain = allData.splitTestAndTrain(0.9);
