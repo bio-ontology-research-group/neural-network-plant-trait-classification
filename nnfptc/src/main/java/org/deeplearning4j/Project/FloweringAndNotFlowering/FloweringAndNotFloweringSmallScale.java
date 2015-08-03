@@ -41,7 +41,7 @@ public class FloweringAndNotFloweringSmallScale {
         List<String> labels = new ArrayList<>();
 
         int numInput = numInputRows * numInputCols;
-        int numOut = labels.size()
+        int numOut = labels.size();
 
         final int numEpochs = 10;
         final int miniBatchSize = 50;
