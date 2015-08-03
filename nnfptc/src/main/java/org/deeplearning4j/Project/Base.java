@@ -46,7 +46,7 @@ public class Base {
         int numImages = 6001;
         List<String> labels = new ArrayList<>();
 
-        // Paramters for neural net configuration.
+        // Parameters for neural net configuration.
         int numInput = numInputRows * numInputCols;
 
 
