@@ -7,19 +7,27 @@ import org.deeplearning4j.datasets.canova.RecordReaderDataSetIterator;
 import org.deeplearning4j.datasets.iterator.DataSetIterator;
 import org.deeplearning4j.datasets.iterator.impl.ListDataSetIterator;
 import org.deeplearning4j.eval.Evaluation;
+import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
+import org.deeplearning4j.nn.conf.distribution.NormalDistribution;
+import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.conf.layers.RBM;
+import org.deeplearning4j.nn.weights.WeightInit;
+import org.deeplearning4j.optimize.api.IterationListener;
+import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.SplitTestAndTrain;
 import org.nd4j.linalg.factory.Nd4j;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
+import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.slf4j.Logger;
 import org.nd4j.linalg.dataset.DataSet;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,22 +38,25 @@ public class FloweringAndNotFloweringSmallScale {
     public static final Logger log = LoggerFactory.getLogger(FloweringAndNotFloweringSmallScale.class);
 
     public static void main (String args[]) throws Exception {
-        String labeledPath = System.getProperty("user.home")+"/datasets/fanfsmall";
-        int numInputRows = 350;
-        int numInputCols = 350;
+        String labeledPath = System.getProperty("user.home")+"/datasets/fanfsmall/";
+        int numInputRows = 300;
+        int numInputCols = 300;
         int numImages = 800;
         List<String> labels = new ArrayList<>();
 
         int numInput = numInputRows * numInputCols;
 
-        final int numEpochs = 10;
-        final int miniBatchSize = 50;
+        final int numEpochs = 20;
+        final int miniBatchSize = 10;
         Evaluation evaluation = new Evaluation();
 
         log.info("Loading labels");
         for(File f : new File(labeledPath).listFiles()) {
             labels.add(f.getName());
         }
+
+        int numOut = labels.size();
+
 
         log.info("Loading data");
 
@@ -56,17 +67,27 @@ public class FloweringAndNotFloweringSmallScale {
 
         log.info("Building model");
 
-        // A Bernoulli RBM
+
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
                 .layer(new RBM())
-                .nIn(numInput).nOut(labels.size())
-                .learningRate(0.06)
-                .iterations(20)
-                .visibleUnit(RBM.VisibleUnit.BINARY).hiddenUnit(RBM.HiddenUnit.BINARY)
-                .list(8).hiddenLayerSizes(1500,1250,1000,850,600,450,200,labels.size()).build();
+                .visibleUnit(RBM.VisibleUnit.GAUSSIAN)
+                .hiddenUnit(RBM.HiddenUnit.RECTIFIED)
+                .weightInit(WeightInit.XAVIER)
+                .seed(123)
+                .iterations(5)
+                .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
+                .list(3)
+                .layer(0, new RBM.Builder().nIn(numInput).nOut(500).build())
+                .layer(1, new RBM.Builder().nIn(500).nOut(250).build())
+                .layer(2, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).activation("softmax")
+                        .nIn(250).nOut(numOut).build())
+                .pretrain(false).backward(true)
+                .build();
 
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(multiLayerConfiguration);
         multiLayerNetwork.init();
+
+        multiLayerNetwork.setListeners(Collections.singletonList((IterationListener) new ScoreIterationListener(1)));
 
         log.info("Splitting dataset - This may take awhile, depending on the input");
         DataSet allData =  dataSetIterator.next();
@@ -74,7 +95,7 @@ public class FloweringAndNotFloweringSmallScale {
         SplitTestAndTrain splitTestAndTrain = allData.splitTestAndTrain(0.9);
         DataSet trainingData = splitTestAndTrain.getTrain();
 
-        log.info("Training on:");
+        log.info("Training Network");
 
         List<DataSet> trainingList = trainingData.asList();
         for(int i = 0 ; i < numEpochs ; i++) {
@@ -83,7 +104,7 @@ public class FloweringAndNotFloweringSmallScale {
             multiLayerNetwork.fit(trainingListIterator);
         }
 
-        log.info("Evaluting model");
+        log.info("Evaluting Network");
 
         DataSet testingData = splitTestAndTrain.getTest();
         INDArray predict = multiLayerNetwork.output(testingData.getFeatureMatrix());
