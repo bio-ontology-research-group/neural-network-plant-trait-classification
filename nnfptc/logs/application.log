@@ -762,3 +762,7 @@ Training Network
 				
 Score at iteration 0 is 163.78778076171875
 
+2015-08-03 19:18:54,909 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
