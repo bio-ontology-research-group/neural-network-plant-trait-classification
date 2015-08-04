@@ -74,6 +74,7 @@ public class FloweringAndNotFloweringSmallScale {
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
                 .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
                 .seed(seed)
+                .iterations(5)
                 .activationFunction("relu")
                 .weightInit(WeightInit.XAVIER)
                 .constrainGradientToUnitNorm(true)

@@ -10,3 +10,24 @@ Getting this project set up is a fairly simple task that will only take a few mi
 
 After that, load the ```nnfptc``` project into IntelliJ, or whatever IDE you use and everything should be set up. If not, feel free to [email me](mailto:keo7@aber.ac.uk) or create a [new issue](https://github.com/bio-ontology-research-group/neural-network-plant-trait-classification/issues).
 
+## Traits
+
+1. Life Form
+2. Growth Form
+3. Leaf - Structure
+4. Leaf - Form
+5. Leaf Venation
+6. Flower - Inflorescence
+7. Flower - Symmetry
+8. Flower - Colour
+9. Flower - Petal (Tepal) number
+10. Flower - Stamen number
+11. Fruit - Type
+12. Fruit - Pericarp
+13. Important diagnostics
+14. Fruit - Dehiscence
+15. Fruit - Surface
+16. Leaf - Margin
+
+
+

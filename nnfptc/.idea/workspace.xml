@@ -62,8 +62,8 @@
       <file leaf-file-name="FloweringAndNotFloweringSmallScale.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/deeplearning4j/Project/FloweringAndNotFloweringSmallScale.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.596519">
-              <caret line="91" column="52" selection-start-line="91" selection-start-column="52" selection-end-line="91" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.6914557">
+              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -624,7 +624,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="960" y="24" width="960" height="1152" extended-state="4" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -967,8 +967,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/deeplearning4j/Project/FloweringAndNotFloweringSmallScale.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.596519">
-          <caret line="91" column="52" selection-start-line="91" selection-start-column="52" selection-end-line="91" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.6914557">
+          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

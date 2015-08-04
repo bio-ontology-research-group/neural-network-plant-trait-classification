@@ -1466,3 +1466,87 @@ Score at iteration 6 is NaN
 				
 Score at iteration 7 is NaN
 
+2015-08-04 15:31:27,160 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 0 is 1.62073536E8
+
+2015-08-04 15:31:53,036 - [WARN] - from org.deeplearning4j.optimize.solvers.BaseOptimizer in main
+				
+Invalid step...continuing another iteration: Slope -0.007131445687264204 is <= 0.0. Expect slope > 0.0
+
+2015-08-04 15:32:37,101 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 8 is NaN
+
+2015-08-04 15:32:51,121 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 1 is 1.62061264E8
+
+2015-08-04 15:33:16,322 - [WARN] - from org.deeplearning4j.optimize.solvers.BaseOptimizer in main
+				
+Invalid step...continuing another iteration: Slope -0.007140229921787977 is <= 0.0. Expect slope > 0.0
+
+2015-08-04 15:34:13,228 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 2 is 1.62039776E8
+
+2015-08-04 15:34:24,364 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 9 is NaN
+
+2015-08-04 15:34:34,389 - [INFO] - from org.deeplearning4j.nn.multilayer.MultiLayerNetwork in main
+				
+Training on layer 1 with 10 examples
+
+2015-08-04 15:34:38,440 - [WARN] - from org.deeplearning4j.optimize.solvers.BaseOptimizer in main
+				
+Invalid step...continuing another iteration: Slope -0.007115078158676624 is <= 0.0. Expect slope > 0.0
+
+2015-08-04 15:35:35,537 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 3 is 1.62091488E8
+
+2015-08-04 15:36:01,395 - [WARN] - from org.deeplearning4j.optimize.solvers.BaseOptimizer in main
+				
+Invalid step...continuing another iteration: Slope -0.0071175480261445045 is <= 0.0. Expect slope > 0.0
+
+2015-08-04 15:36:57,719 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 0 is NaN
+
+2015-08-04 15:36:59,144 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 4 is 1.62091344E8
+
+2015-08-04 15:37:09,670 - [INFO] - from org.deeplearning4j.nn.multilayer.MultiLayerNetwork in main
+				
+Training on layer 1 with 10 examples
+
+2015-08-04 15:38:44,364 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 1 is NaN
+
+2015-08-04 15:39:34,653 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 0 is 1.45316928E8
+
+2015-08-04 15:40:00,319 - [WARN] - from org.deeplearning4j.optimize.solvers.BaseOptimizer in main
+				
+Invalid step...continuing another iteration: Slope -0.006024261470884085 is <= 0.0. Expect slope > 0.0
+
+2015-08-04 15:40:31,317 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 2 is NaN
+
+2015-08-04 15:40:56,075 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-04 15:40:56,084 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-04 15:40:56,890 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
