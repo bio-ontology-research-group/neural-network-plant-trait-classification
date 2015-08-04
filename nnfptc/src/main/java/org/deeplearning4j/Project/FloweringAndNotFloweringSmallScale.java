@@ -77,6 +77,7 @@ public class FloweringAndNotFloweringSmallScale {
                 .iterations(iterations)
                 .maxNumLineSearchIterations(10) // Magical Optimisation Stuff
                 .activationFunction("relu")
+                .k(1) // Annoying dl4j bug that is yet to be fixed.
                 .weightInit(WeightInit.XAVIER)
                 .constrainGradientToUnitNorm(true)
                 .hiddenUnit(RBM.HiddenUnit.RECTIFIED)

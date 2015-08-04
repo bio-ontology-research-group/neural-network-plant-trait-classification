@@ -1774,3 +1774,7 @@ Score at iteration 9 is NaN
 				
 Training on layer 1 with 10 examples
 
+2015-08-05 00:50:03,995 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
