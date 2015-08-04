@@ -846,3 +846,47 @@ Score at iteration 3 is 237.13999938964844
 				
 Score at iteration 4 is 239.37315368652344
 
+2015-08-04 13:37:09,883 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-04 13:37:09,885 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-04 13:37:10,719 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-04 13:37:20,169 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-04 13:37:20,172 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-04 13:37:20,993 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-04 13:38:41,223 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-04 13:39:33,277 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-04 13:45:33,173 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-04 13:45:33,176 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-04 13:45:34,014 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
