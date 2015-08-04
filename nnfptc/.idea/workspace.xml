@@ -9,7 +9,6 @@
     <list default="true" id="706725d3-6c44-4f93-8f41-f5e93892260a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/deeplearning4j/Project/FloweringAndNotFloweringSmallScale.java" afterPath="$PROJECT_DIR$/src/main/java/org/deeplearning4j/Project/FloweringAndNotFloweringSmallScale.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logs/application.log" afterPath="$PROJECT_DIR$/logs/application.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nnfptc.iml" afterPath="$PROJECT_DIR$/nnfptc.iml" />
     </list>
     <ignored path="nnfptc.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,8 +62,8 @@
       <file leaf-file-name="FloweringAndNotFloweringSmallScale.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/deeplearning4j/Project/FloweringAndNotFloweringSmallScale.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.62025315">
-              <caret line="92" column="46" selection-start-line="91" selection-start-column="0" selection-end-line="92" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.596519">
+              <caret line="91" column="52" selection-start-line="91" selection-start-column="52" selection-end-line="91" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -625,7 +624,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="960" y="24" width="960" height="1152" extended-state="4" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -968,8 +967,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/deeplearning4j/Project/FloweringAndNotFloweringSmallScale.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62025315">
-          <caret line="92" column="46" selection-start-line="91" selection-start-column="0" selection-end-line="92" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.596519">
+          <caret line="91" column="52" selection-start-line="91" selection-start-column="52" selection-end-line="91" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

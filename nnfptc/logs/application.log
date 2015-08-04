@@ -1406,3 +1406,63 @@ Building model
 				
 Splitting dataset - This may take awhile, depending on the input
 
+2015-08-04 15:23:20,278 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-04 15:23:40,297 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 3 is NaN
+
+2015-08-04 15:25:24,971 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 4 is NaN
+
+2015-08-04 15:25:42,487 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 0 is 1.99163056E8
+
+2015-08-04 15:26:06,704 - [WARN] - from org.deeplearning4j.optimize.solvers.BaseOptimizer in main
+				
+Invalid step...continuing another iteration: Slope -0.004755906295031309 is <= 0.0. Expect slope > 0.0
+
+2015-08-04 15:27:06,451 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 1 is 1.99094832E8
+
+2015-08-04 15:27:11,926 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 5 is NaN
+
+2015-08-04 15:27:34,464 - [WARN] - from org.deeplearning4j.optimize.solvers.BaseOptimizer in main
+				
+Invalid step...continuing another iteration: Slope -0.004786706063896418 is <= 0.0. Expect slope > 0.0
+
+2015-08-04 15:27:59,432 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-04 15:27:59,435 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-04 15:28:00,237 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-04 15:28:16,937 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-04 15:28:57,631 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-04 15:28:58,454 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 6 is NaN
+
+2015-08-04 15:30:48,181 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 7 is NaN
+

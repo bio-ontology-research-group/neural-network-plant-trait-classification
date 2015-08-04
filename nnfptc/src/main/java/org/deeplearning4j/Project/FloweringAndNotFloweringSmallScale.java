@@ -74,6 +74,7 @@ public class FloweringAndNotFloweringSmallScale {
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
                 .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
                 .seed(seed)
+                .activationFunction("relu")
                 .weightInit(WeightInit.XAVIER)
                 .constrainGradientToUnitNorm(true)
                 .hiddenUnit(RBM.HiddenUnit.RECTIFIED)
@@ -87,6 +88,8 @@ public class FloweringAndNotFloweringSmallScale {
                 .layer(5, new RBM.Builder().nIn(500).nOut(250).build())
                 .layer(6, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).activation("softmax")
                         .nIn(250).nOut(numOut).build())
+                // Pretrain is unsupervised pretraining and finetuning on output layer
+                // Backward is full propagation on ALL layers.
                 .pretrain(true).backward(false)
                 .build();
 
