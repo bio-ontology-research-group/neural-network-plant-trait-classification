@@ -46,11 +46,11 @@ public class FloweringAndNotFloweringSmallScale {
         List<String> labels = new ArrayList<>();
 
         int numInput = numInputRows * numInputCols;
-        int iterations = 10;
+        int iterations = 5;
         int seed = 123;
 
         final int numEpochs = 20;
-        final int miniBatchSize = 10;
+        final int miniBatchSize = 100;
         Evaluation evaluation = new Evaluation();
 
         log.info("Loading labels");
@@ -74,7 +74,8 @@ public class FloweringAndNotFloweringSmallScale {
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
                 .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
                 .seed(seed)
-                .iterations(5)
+                .iterations(iterations)
+                .maxNumLineSearchIterations(10) // Magical Optimisation Stuff
                 .activationFunction("relu")
                 .weightInit(WeightInit.XAVIER)
                 .constrainGradientToUnitNorm(true)
@@ -91,7 +92,7 @@ public class FloweringAndNotFloweringSmallScale {
                         .nIn(250).nOut(numOut).build())
                 // Pretrain is unsupervised pretraining and finetuning on output layer
                 // Backward is full propagation on ALL layers.
-                .pretrain(true).backward(false)
+                .pretrain(false).backward(true)
                 .build();
 
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(multiLayerConfiguration);
