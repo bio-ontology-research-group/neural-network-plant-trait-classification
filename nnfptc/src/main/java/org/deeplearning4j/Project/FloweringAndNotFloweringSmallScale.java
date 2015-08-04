@@ -72,17 +72,12 @@ public class FloweringAndNotFloweringSmallScale {
 
 
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
-                .weightInit(WeightInit.DISTRIBUTION).dist(new NormalDistribution(0,0.01))
-                .seed(seed)
-                .constrainGradientToUnitNorm(true)
-                .iterations(iterations)
-                .updater(Updater.ADAGRAD)
-                .momentum(0.5)
-                .momentumAfter(Collections.singletonMap(3, 0.9))
                 .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
-                .visibleUnit(RBM.VisibleUnit.BINARY)
-                .k(1) // STUPID BUG IN DL4J.
-                .hiddenUnit(RBM.HiddenUnit.BINARY)
+                .seed(seed)
+                .weightInit(WeightInit.XAVIER)
+                .constrainGradientToUnitNorm(true)
+                .hiddenUnit(RBM.HiddenUnit.RECTIFIED)
+                .visibleUnit(RBM.VisibleUnit.GAUSSIAN)
                 .list(7)
                 .layer(0, new RBM.Builder().nIn(numInput).nOut(2500).build())
                 .layer(1, new RBM.Builder().nIn(2500).nOut(2000).build())
@@ -97,8 +92,6 @@ public class FloweringAndNotFloweringSmallScale {
 
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(multiLayerConfiguration);
         multiLayerNetwork.init();
-
-        System.out.print(multiLayerConfiguration.toString());
 
         multiLayerNetwork.setListeners(Collections.singletonList((IterationListener) new ScoreIterationListener(1)));
 

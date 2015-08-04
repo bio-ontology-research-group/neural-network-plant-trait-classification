@@ -1342,3 +1342,67 @@ Building model
 				
 Splitting dataset - This may take awhile, depending on the input
 
+2015-08-04 15:14:41,892 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-04 15:14:41,895 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-04 15:14:42,702 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-04 15:14:56,595 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-04 15:15:37,259 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-04 15:18:01,244 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 0 is NaN
+
+2015-08-04 15:20:04,928 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 1 is NaN
+
+2015-08-04 15:20:18,204 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-04 15:20:18,206 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-04 15:20:18,965 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-04 15:20:33,220 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-04 15:21:54,488 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in main
+				
+Score at iteration 2 is NaN
+
+2015-08-04 15:22:23,507 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-04 15:22:23,509 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-04 15:22:24,275 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-04 15:22:40,914 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
