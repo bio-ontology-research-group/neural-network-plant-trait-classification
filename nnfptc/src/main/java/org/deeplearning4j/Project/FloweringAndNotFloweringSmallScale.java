@@ -10,6 +10,7 @@ import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
+import org.deeplearning4j.nn.conf.Updater;
 import org.deeplearning4j.nn.conf.distribution.NormalDistribution;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.conf.layers.RBM;
@@ -39,12 +40,14 @@ public class FloweringAndNotFloweringSmallScale {
 
     public static void main (String args[]) throws Exception {
         String labeledPath = System.getProperty("user.home")+"/datasets/fanfsmall/";
-        int numInputRows = 300;
-        int numInputCols = 300;
+        int numInputRows = 128;
+        int numInputCols = 128;
         int numImages = 800;
         List<String> labels = new ArrayList<>();
 
         int numInput = numInputRows * numInputCols;
+        int iterations = 10;
+        int seed = 123;
 
         final int numEpochs = 20;
         final int miniBatchSize = 10;
@@ -69,16 +72,17 @@ public class FloweringAndNotFloweringSmallScale {
 
 
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
-                .layer(new RBM())
-                .visibleUnit(RBM.VisibleUnit.GAUSSIAN)
-                .hiddenUnit(RBM.HiddenUnit.RECTIFIED)
-                .weightInit(WeightInit.XAVIER)
-                .seed(123)
-                .iterations(5)
-                .learningRate(1e-3)
-                .l1(0.3).regularization(true).l2(1e-3)
+                .weightInit(WeightInit.DISTRIBUTION).dist(new NormalDistribution(0,0.01))
+                .seed(seed)
                 .constrainGradientToUnitNorm(true)
-                .activationFunction("tanh")
+                .iterations(iterations)
+                .updater(Updater.ADAGRAD)
+                .momentum(0.5)
+                .momentumAfter(Collections.singletonMap(3, 0.9))
+                .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
+                .visibleUnit(RBM.VisibleUnit.BINARY)
+                .k(1) // STUPID BUG IN DL4J.
+                .hiddenUnit(RBM.HiddenUnit.BINARY)
                 .list(7)
                 .layer(0, new RBM.Builder().nIn(numInput).nOut(2500).build())
                 .layer(1, new RBM.Builder().nIn(2500).nOut(2000).build())
@@ -88,11 +92,13 @@ public class FloweringAndNotFloweringSmallScale {
                 .layer(5, new RBM.Builder().nIn(500).nOut(250).build())
                 .layer(6, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).activation("softmax")
                         .nIn(250).nOut(numOut).build())
-                .pretrain(false).backward(true)
+                .pretrain(true).backward(false)
                 .build();
 
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(multiLayerConfiguration);
         multiLayerNetwork.init();
+
+        System.out.print(multiLayerConfiguration.toString());
 
         multiLayerNetwork.setListeners(Collections.singletonList((IterationListener) new ScoreIterationListener(1)));
 
