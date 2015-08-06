@@ -1,3 +1,4 @@
+./scripts/*.txt
 *.csv
 *.tsv
 *.txt
