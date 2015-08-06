@@ -39,10 +39,10 @@ public class FloweringAndNotFloweringSmallScale {
     public static final Logger log = LoggerFactory.getLogger(FloweringAndNotFloweringSmallScale.class);
 
     public static void main (String args[]) throws Exception {
-        String labeledPath = System.getProperty("user.home")+"/datasets/fanfsmall/";
-        int numInputRows = 128;
-        int numInputCols = 128;
-        int numImages = 800;
+        String labeledPath = System.getProperty("user.home")+"/datasets/fanfSmall/";
+        int numInputRows = 28;
+        int numInputCols = 28;
+        int numImages = 200;
         List<String> labels = new ArrayList<>();
 
         int numInput = numInputRows * numInputCols;
@@ -81,15 +81,13 @@ public class FloweringAndNotFloweringSmallScale {
                 .weightInit(WeightInit.XAVIER)
                 .constrainGradientToUnitNorm(true)
                 .hiddenUnit(RBM.HiddenUnit.RECTIFIED)
+                .regularization(true)
                 .visibleUnit(RBM.VisibleUnit.GAUSSIAN)
-                .list(7)
-                .layer(0, new RBM.Builder().nIn(numInput).nOut(2500).build())
-                .layer(1, new RBM.Builder().nIn(2500).nOut(2000).build())
-                .layer(2, new RBM.Builder().nIn(2000).nOut(1500).build())
-                .layer(3, new RBM.Builder().nIn(1500).nOut(1000).build())
-                .layer(4, new RBM.Builder().nIn(1000).nOut(500).build())
-                .layer(5, new RBM.Builder().nIn(500).nOut(250).build())
-                .layer(6, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).activation("softmax")
+                .list(4)
+                .layer(0, new RBM.Builder().nIn(numInput).nOut(1000).build())
+                .layer(1, new RBM.Builder().nIn(100).nOut(500).build())
+                .layer(2, new RBM.Builder().nIn(500).nOut(250).build())
+                .layer(3, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).activation("softmax")
                         .nIn(250).nOut(numOut).build())
                 // Pretrain is unsupervised pretraining and finetuning on output layer
                 // Backward is full propagation on ALL layers.
