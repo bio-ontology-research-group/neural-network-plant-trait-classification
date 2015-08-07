@@ -1,4 +1,4 @@
-package org.deeplearning4j.Project;
+package org.deeplearning4j.Project.Fanf;
 
 import org.canova.api.records.reader.RecordReader;
 import org.canova.api.split.FileSplit;
@@ -10,13 +10,12 @@ import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
-import org.deeplearning4j.nn.conf.Updater;
-import org.deeplearning4j.nn.conf.distribution.NormalDistribution;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.conf.layers.RBM;
 import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.api.IterationListener;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
+import org.deeplearning4j.plot.iterationlistener.GradientPlotterIterationListener;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.SplitTestAndTrain;
 import org.nd4j.linalg.factory.Nd4j;
@@ -35,14 +34,16 @@ import java.util.List;
 /**
  * Created by osheak on 03/08/15.
  */
-public class FloweringAndNotFloweringSmallScale {
-    public static final Logger log = LoggerFactory.getLogger(FloweringAndNotFloweringSmallScale.class);
+public class FloweringAndNotFloweringFull {
+    public static final Logger log = LoggerFactory.getLogger(FloweringAndNotFloweringFull.class);
 
     public static void main (String args[]) throws Exception {
-        String labeledPath = System.getProperty("user.home")+"/datasets/fanfSmall/";
+        String labeledPath = System.getProperty("user.home")+"/datasets/fanfMid/";
+        int numNF = 1000;
+        int numF = 1000;
         int numInputRows = 28;
         int numInputCols = 28;
-        int numImages = 200;
+        int numImages = numF + numNF;
         List<String> labels = new ArrayList<>();
 
         int numInput = numInputRows * numInputCols;
@@ -63,11 +64,10 @@ public class FloweringAndNotFloweringSmallScale {
 
         log.info("Loading data");
 
-        RecordReader recordReader = new ImageRecordReader(numInputRows, numInputCols, true);
+        RecordReader recordReader = new ImageRecordReader(numInputRows, numInputCols, true, labels);
         recordReader.initialize(new FileSplit(new File(labeledPath)));
         DataSetIterator dataSetIterator = new RecordReaderDataSetIterator(recordReader, numImages, numInput, labels.size());
         Nd4j.ENFORCE_NUMERICAL_STABILITY = true;
-
 
         log.info("Building model");
 
@@ -85,23 +85,28 @@ public class FloweringAndNotFloweringSmallScale {
                 .regularization(true)
                 .visibleUnit(RBM.VisibleUnit.GAUSSIAN)
                 .list(4)
-                .layer(0, new RBM.Builder().nIn(numInput).nOut(1000).build())
-                .layer(1, new RBM.Builder().nIn(100).nOut(500).build())
-                .layer(2, new RBM.Builder().nIn(500).nOut(250).build())
+                .layer(0, new RBM.Builder().nIn(numInput).nOut(500).build())
+                .layer(1, new RBM.Builder().nIn(500).nOut(250).build())
+                .layer(2, new RBM.Builder().nIn(250).nOut(100).build())
                 .layer(3, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).activation("softmax")
-                        .nIn(250).nOut(numOut).build())
-                // Pretrain is unsupervised pretraining and finetuning on output layer
-                // Backward is full propagation on ALL layers.
-                .pretrain(false).backward(true)
+                        .nIn(100).nOut(numOut).build())
+                        // Pretrain is unsupervised pretraining and finetuning on output layer
+                        // Backward is full propagation on ALL layers.
+                .pretrain(false).backprop(true)
                 .build();
 
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(multiLayerConfiguration);
         multiLayerNetwork.init();
 
-        multiLayerNetwork.setListeners(Collections.singletonList((IterationListener) new ScoreIterationListener(1)));
+        multiLayerNetwork.setListeners(Arrays.<IterationListener>asList(new ScoreIterationListener(1), new GradientPlotterIterationListener(5)));
 
         log.info("Splitting dataset - This may take awhile, depending on the input");
-        DataSet allData =  dataSetIterator.next();
+
+        DataSet allData = new DataSet();
+        // Loading Entirety of dataSetIterator into memory.
+        while(dataSetIterator.hasNext()) {
+            allData = dataSetIterator.next();
+        }
 
         SplitTestAndTrain splitTestAndTrain = allData.splitTestAndTrain(0.9);
         DataSet trainingData = splitTestAndTrain.getTrain();
@@ -115,7 +120,7 @@ public class FloweringAndNotFloweringSmallScale {
             multiLayerNetwork.fit(trainingListIterator);
         }
 
-        log.info("Evaluting Network");
+        log.info("Evaluating Network");
 
         DataSet testingData = splitTestAndTrain.getTest();
         INDArray predict = multiLayerNetwork.output(testingData.getFeatureMatrix());

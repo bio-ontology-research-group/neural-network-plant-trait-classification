@@ -1,4 +1,4 @@
-package org.deeplearning4j.Project;
+package org.deeplearning4j.Project.Fanf;
 
 import org.canova.api.records.reader.RecordReader;
 import org.canova.api.split.FileSplit;
@@ -7,10 +7,12 @@ import org.deeplearning4j.datasets.canova.RecordReaderDataSetIterator;
 import org.deeplearning4j.datasets.iterator.DataSetIterator;
 import org.deeplearning4j.datasets.iterator.impl.ListDataSetIterator;
 import org.deeplearning4j.eval.Evaluation;
+import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.conf.layers.RBM;
+import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.api.IterationListener;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -27,32 +29,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
-/*
- * Base.java
- *
- * Base java file for work. Use this as a template for experimentation.
+/**
+ * Created by osheak on 03/08/15.
  */
+public class FloweringAndNotFloweringSmallScale {
+    public static final Logger log = LoggerFactory.getLogger(FloweringAndNotFloweringSmallScale.class);
 
-public class Base {
-    public static final Logger log = LoggerFactory.getLogger(Base.class);
-
-    public static void main (String args []) throws Exception {
-
-        // Parameters for loading data.
-        String labeledPath = System.getProperty("user.home")+"/path/to/directory";
-        int numInputRows = 200;
-        int numInputCols = 200;
-        int numImages = 1993;
+    public static void main (String args[]) throws Exception {
+        String labeledPath = System.getProperty("user.home")+"/datasets/fanfSmall/";
+        int numInputRows = 28;
+        int numInputCols = 28;
+        int numImages = 200;
         List<String> labels = new ArrayList<>();
 
-        // Parameters for neural net configuration.
         int numInput = numInputRows * numInputCols;
+        int iterations = 5;
+        int seed = 123;
 
-
-        // Parameters for training/evaluation
-        final int numEpochs = 10;
-        final int miniBatchSize = 100;
+        final int numEpochs = 20;
+        final int miniBatchSize = 10;
         Evaluation evaluation = new Evaluation();
 
         log.info("Loading labels");
@@ -60,24 +55,10 @@ public class Base {
             labels.add(f.getName());
         }
 
-        log.info("Loading data");
+        int numOut = labels.size();
 
-        /*
-         * RecordReader: class from Canova (https://github.com/jpatanooga/Canova)
-         * that converts byte input that's orientated to a collection of elements that
-         * are a FIXED NUMBER and indexed with a UID. This process is requried to
-         * vectorise the data, of which every element is a feature.
-         *
-         * ImageRecordReader: a subclass of RecordREader and automatically takes
-         * 28x28 dimension images. We need to change the dimensions of this to match
-         * our images, of which we do in the 3rd parameter. We also feed in the labels
-         * to validate the neural net model results (the last parameter identifies that).
-         *
-         * DataSetIterator: a class that traverses through the RecordReader, and helps
-         * keep track of how many and what images have already been fed through the
-         * model. In this line, we are also converting the images into vectors of elements,
-         * opposed to a 28x28 matrix, and identify the number of labels.
-         */
+
+        log.info("Loading data");
 
         RecordReader recordReader = new ImageRecordReader(numInputRows, numInputCols, true);
         recordReader.initialize(new FileSplit(new File(labeledPath)));
@@ -86,24 +67,36 @@ public class Base {
 
         log.info("Building model");
 
+
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
-                .layer(new RBM())
-                .list(2)
-                .layer(0, new RBM.Builder().nIn(numInput).nOut(1600).build())
-                .layer(1, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).nIn(1600).nOut(labels.size()).activation("softmax").build())
+                .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
+                .seed(seed)
+                .iterations(iterations)
+                .maxNumLineSearchIterations(10) // Magical Optimisation Stuff
+                .activationFunction("relu")
+                .k(1) // Annoying dl4j bug that is yet to be fixed.
+                .weightInit(WeightInit.XAVIER)
+                .constrainGradientToUnitNorm(true)
+                .hiddenUnit(RBM.HiddenUnit.RECTIFIED)
+                .regularization(true)
+                .visibleUnit(RBM.VisibleUnit.GAUSSIAN)
+                .list(4)
+                .layer(0, new RBM.Builder().nIn(numInput).nOut(500).build())
+                .layer(1, new RBM.Builder().nIn(500).nOut(250).build())
+                .layer(2, new RBM.Builder().nIn(250).nOut(100).build())
+                .layer(3, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).activation("softmax")
+                        .nIn(100).nOut(numOut).build())
+                // Pretrain is unsupervised pretraining and finetuning on output layer
+                // Backward is full propagation on ALL layers.
+                .pretrain(false).backprop(true)
                 .build();
 
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(multiLayerConfiguration);
         multiLayerNetwork.init();
 
-        /* Print out error rate, good for troubleshooting as we're not going to want
-         * to constantly study the weights.
-         */
-
         multiLayerNetwork.setListeners(Collections.singletonList((IterationListener) new ScoreIterationListener(1)));
 
-        log.info("Splitting dataset");
-
+        log.info("Splitting dataset - This may take awhile, depending on the input");
         DataSet allData = new DataSet();
         // Loading entirety of dataset into memory
         while(dataSetIterator.hasNext()) {
@@ -113,7 +106,7 @@ public class Base {
         SplitTestAndTrain splitTestAndTrain = allData.splitTestAndTrain(0.9);
         DataSet trainingData = splitTestAndTrain.getTrain();
 
-        log.info("Training on");
+        log.info("Training Network");
 
         List<DataSet> trainingList = trainingData.asList();
         for(int i = 0 ; i < numEpochs ; i++) {
@@ -122,15 +115,13 @@ public class Base {
             multiLayerNetwork.fit(trainingListIterator);
         }
 
-        log.info("Evaluating model");
+        log.info("Evalauting Network");
 
         DataSet testingData = splitTestAndTrain.getTest();
         INDArray predict = multiLayerNetwork.output(testingData.getFeatureMatrix());
+
         evaluation.eval(testingData.getLabels(), predict);
 
         log.info(evaluation.stats());
     }
-
-
-
 }

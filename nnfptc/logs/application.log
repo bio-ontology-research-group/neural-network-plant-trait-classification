@@ -1962,3 +1962,906 @@ Splitting dataset - This may take awhile, depending on the input
 				
 Training Network
 
+2015-08-07 22:48:18,466 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 22:48:18,468 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 22:48:18,945 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 22:48:24,822 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 22:48:41,446 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 22:51:30,849 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 22:51:30,854 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 22:51:31,356 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 22:51:37,247 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 22:51:53,114 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 22:56:17,680 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 22:56:17,683 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 22:56:18,267 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 22:56:24,597 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 22:56:41,494 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 22:57:40,219 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 22:57:40,222 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 22:57:40,709 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 22:57:43,683 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 22:57:59,365 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 22:59:23,138 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 22:59:23,141 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 22:59:23,724 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:02:47,761 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:02:47,780 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:02:48,379 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:02:51,769 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 23:03:08,678 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 23:12:45,930 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:12:45,949 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:12:46,457 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:12:49,246 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 23:13:05,101 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 23:13:46,626 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:13:46,629 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:13:47,170 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:13:50,046 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 23:14:05,803 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 23:20:02,970 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:20:02,974 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:20:03,448 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:20:06,132 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 23:20:14,269 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 23:23:31,774 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:23:31,777 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:23:32,241 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:23:34,794 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 23:23:43,309 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 23:44:23,010 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:44:23,026 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:49:44,086 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:49:44,089 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:49:44,571 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:49:46,440 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 23:49:54,680 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 23:50:29,894 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Evaluting Network
+
+2015-08-07 23:50:29,924 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-07 23:50:29,938 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 15 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
+2015-08-07 23:51:36,924 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:51:36,928 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:51:37,411 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:51:39,288 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 23:51:47,349 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 23:52:05,216 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:52:05,220 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:52:05,715 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:52:07,452 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 23:52:15,734 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-07 23:54:19,014 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Evaluting Network
+
+2015-08-07 23:54:19,043 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-07 23:54:19,058 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 15 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
+2015-08-07 23:55:49,329 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:55:49,333 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:55:49,841 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:58:44,885 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 23:58:44,889 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 23:58:45,365 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 23:58:47,281 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 23:58:55,458 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
+2015-08-08 00:01:03,079 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringSmallScale in main
+				
+Evaluting Network
+
+2015-08-08 00:01:03,108 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-08 00:01:03,122 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringSmallScale in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 15 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
+2015-08-08 00:01:08,809 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:01:08,813 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:01:09,629 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:01:11,436 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:11:34,587 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:11:34,590 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:11:35,045 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:11:37,003 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:11:46,089 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Training Network
+
+2015-08-08 00:12:23,549 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Evaluting Network
+
+2015-08-08 00:12:23,580 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-08 00:12:23,595 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 15 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
+2015-08-08 00:15:30,858 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Training Network
+
+2015-08-08 00:18:06,764 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:18:06,767 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:18:07,248 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:18:09,290 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:18:10,127 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Training Network
+
+2015-08-08 00:18:21,510 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Evaluting Network
+
+2015-08-08 00:18:21,519 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-08 00:18:21,536 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 1 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
+2015-08-08 00:18:39,129 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:18:39,133 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:18:39,604 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:18:41,350 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:18:58,572 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:18:58,576 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:18:59,050 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:19:01,092 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:19:10,517 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Training Network
+
+2015-08-08 00:19:48,559 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Evaluting Network
+
+2015-08-08 00:19:48,601 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-08 00:19:48,618 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 15 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
+2015-08-08 00:23:37,072 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:23:37,094 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:23:37,579 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:23:39,336 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:24:25,565 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:24:25,568 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:24:26,039 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:24:27,866 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:24:47,482 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:24:47,485 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:24:47,953 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:24:49,949 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:25:11,412 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:25:11,415 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:25:11,902 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:25:13,693 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:25:21,823 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Training Network
+
+2015-08-08 00:25:58,845 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Evaluting Network
+
+2015-08-08 00:25:58,882 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-08 00:25:58,897 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 15 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
+2015-08-08 00:27:52,114 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:27:52,118 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:27:52,578 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:27:54,519 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:27:55,393 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Training Network
+
+2015-08-08 00:28:06,281 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Evaluting Network
+
+2015-08-08 00:28:06,290 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-08 00:28:06,307 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 1 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
+2015-08-08 00:29:35,453 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:29:35,456 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:29:35,921 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:29:37,688 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:30:03,563 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:30:03,567 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:34:42,158 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:34:42,161 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:34:42,641 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:34:44,468 - [INFO] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Data stored at /tmp/data/
+
+2015-08-08 00:34:44,468 - [WARN] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Graphs stored at /tmp/graphs/a0facd0d-1dde-4033-a314-819345d7fd67/. Warning: You must manually delete the folder when you are done.
+
+2015-08-08 00:36:21,479 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:36:21,495 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:36:21,984 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:36:23,959 - [INFO] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Data stored at /tmp/data/
+
+2015-08-08 00:36:23,959 - [WARN] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Graphs stored at /tmp/graphs/5dfc26d9-22f7-4b62-bec7-00d4d692d5ad/. Warning: You must manually delete the folder when you are done.
+
+2015-08-08 00:36:23,966 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:36:32,321 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Training Network
+
+2015-08-08 00:36:42,270 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Evaluting Network
+
+2015-08-08 00:36:42,275 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-08 00:36:42,291 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 1 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
+2015-08-08 00:40:22,008 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:40:22,012 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:41:19,290 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:41:19,294 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:41:19,754 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:41:21,611 - [INFO] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Data stored at /tmp/data/
+
+2015-08-08 00:41:21,612 - [WARN] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Graphs stored at /tmp/graphs/af230b80-c3af-4e8a-b1fd-224b2626bd40/. Warning: You must manually delete the folder when you are done.
+
+2015-08-08 00:41:21,617 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:42:16,089 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:42:16,092 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:42:16,555 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:42:39,284 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:42:39,287 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:42:39,745 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:42:41,570 - [INFO] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Data stored at /tmp/data/
+
+2015-08-08 00:42:41,570 - [WARN] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Graphs stored at /tmp/graphs/f084ce86-6d81-4156-95df-5508600dc05f/. Warning: You must manually delete the folder when you are done.
+
+2015-08-08 00:42:41,576 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:42:57,830 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:42:57,833 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:42:58,321 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:43:00,140 - [INFO] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Data stored at /tmp/data/
+
+2015-08-08 00:43:00,140 - [WARN] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Graphs stored at /tmp/graphs/b9c4f666-6816-4d0a-babb-7da9d55e7a87/. Warning: You must manually delete the folder when you are done.
+
+2015-08-08 00:43:00,146 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:43:08,653 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Training Network
+
+2015-08-08 00:43:44,618 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Evaluating Network
+
+2015-08-08 00:43:44,649 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-08 00:43:44,663 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 15 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
+2015-08-08 00:44:46,572 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading labels
+
+2015-08-08 00:44:46,576 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Loading data
+
+2015-08-08 00:44:47,090 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Building model
+
+2015-08-08 00:44:49,165 - [INFO] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Data stored at /tmp/data/
+
+2015-08-08 00:44:49,165 - [WARN] - from org.deeplearning4j.plot.NeuralNetPlotter in main
+				
+Graphs stored at /tmp/graphs/2ebc36e8-2341-4e4b-91dd-c59d4cdcb414/. Warning: You must manually delete the folder when you are done.
+
+2015-08-08 00:44:49,171 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-08 00:46:06,872 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Training Network
+
+2015-08-08 00:51:09,094 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+Evaluating Network
+
+2015-08-08 00:51:09,369 - [WARN] - from org.deeplearning4j.eval.Evaluation in main
+				
+Creating confusion matrix based on classes passed in . Will assume the label distribution passed in is indicative of the overall dataset
+
+2015-08-08 00:51:09,390 - [INFO] - from org.deeplearning4j.Project.Fanf.FloweringAndNotFloweringFull in main
+				
+
+
+Actual Class 0 was predicted with Predicted 0 with count 148 times
+
+==========================Scores========================================
+ Accuracy:  1
+ Precision: 1
+ Recall:    1
+ F1 Score:  1.0
+===========================================================================
+
