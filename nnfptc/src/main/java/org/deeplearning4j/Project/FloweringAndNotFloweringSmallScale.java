@@ -68,6 +68,7 @@ public class FloweringAndNotFloweringSmallScale {
         DataSetIterator dataSetIterator = new RecordReaderDataSetIterator(recordReader, numImages, numInput, labels.size());
         Nd4j.ENFORCE_NUMERICAL_STABILITY = true;
 
+
         log.info("Building model");
 
 

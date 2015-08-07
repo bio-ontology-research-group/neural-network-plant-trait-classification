@@ -1942,3 +1942,23 @@ Score at iteration 0 is -3.0402793884277344
 				
 Score at iteration 1 is -6.52881383895874
 
+2015-08-07 14:47:51,289 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading labels
+
+2015-08-07 14:47:51,292 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Loading data
+
+2015-08-07 14:47:51,785 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Building model
+
+2015-08-07 14:47:56,871 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Splitting dataset - This may take awhile, depending on the input
+
+2015-08-07 14:48:12,982 - [INFO] - from org.deeplearning4j.Project.FloweringAndNotFloweringSmallScale in main
+				
+Training Network
+
