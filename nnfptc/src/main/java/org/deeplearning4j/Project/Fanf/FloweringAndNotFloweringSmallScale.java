@@ -10,6 +10,8 @@ import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
+import org.deeplearning4j.nn.conf.Updater;
+import org.deeplearning4j.nn.conf.distribution.NormalDistribution;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.conf.layers.RBM;
 import org.deeplearning4j.nn.weights.WeightInit;
@@ -48,14 +50,15 @@ public class FloweringAndNotFloweringSmallScale {
 
         final int numEpochs = 20;
         final int miniBatchSize = 10;
-        Evaluation evaluation = new Evaluation();
+        int numOut = labels.size();
+
+        Evaluation evaluation = new Evaluation(numOut);
 
         log.info("Loading labels");
         for(File f : new File(labeledPath).listFiles()) {
             labels.add(f.getName());
         }
 
-        int numOut = labels.size();
 
 
         log.info("Loading data");
@@ -68,28 +71,27 @@ public class FloweringAndNotFloweringSmallScale {
         log.info("Building model");
 
 
+        log.info("Build model....");
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
-                .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
+                .weightInit(WeightInit.NORMALIZED).dist(new NormalDistribution(0.01, 0.01))
                 .seed(seed)
-                .iterations(iterations)
-                .maxNumLineSearchIterations(10) // Magical Optimisation Stuff
-                .activationFunction("relu")
-                .k(1) // Annoying dl4j bug that is yet to be fixed.
-                .weightInit(WeightInit.XAVIER)
                 .constrainGradientToUnitNorm(true)
-                .hiddenUnit(RBM.HiddenUnit.RECTIFIED)
-                .regularization(true)
-                .visibleUnit(RBM.VisibleUnit.GAUSSIAN)
-                .list(4)
-                .layer(0, new RBM.Builder().nIn(numInput).nOut(500).build())
-                .layer(1, new RBM.Builder().nIn(500).nOut(250).build())
-                .layer(2, new RBM.Builder().nIn(250).nOut(100).build())
-                .layer(3, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).activation("softmax")
-                        .nIn(100).nOut(numOut).build())
-                // Pretrain is unsupervised pretraining and finetuning on output layer
-                // Backward is full propagation on ALL layers.
-                .pretrain(false).backprop(true)
-                .build();
+                .iterations(iterations)
+                .learningRate(0.03)
+                .momentum(0.5)
+                .dropOut(0.5)
+                .activationFunction("sigmoid")
+                .momentumAfter(Collections.singletonMap(3, 0.9))
+                .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
+                        .visibleUnit(RBM.VisibleUnit.BINARY)
+                        .hiddenUnit(RBM.HiddenUnit.RECTIFIED)
+                        .list(4)
+                        .layer(0, new RBM.Builder().nIn(numInput).nOut(500).build())
+                        .layer(1, new RBM.Builder().nIn(500).nOut(250).build())
+                        .layer(2, new RBM.Builder().nIn(250).nOut(200).build())
+                        .layer(3, new OutputLayer.Builder(LossFunctions.LossFunction.RMSE_XENT).activation("softmax")
+                                .nIn(200).nOut(numOut).build())
+                        .build();
 
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(multiLayerConfiguration);
         multiLayerNetwork.init();

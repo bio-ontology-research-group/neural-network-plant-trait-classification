@@ -10,6 +10,8 @@ import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
+import org.deeplearning4j.nn.conf.Updater;
+import org.deeplearning4j.nn.conf.distribution.NormalDistribution;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.conf.layers.RBM;
 import org.deeplearning4j.nn.weights.WeightInit;
@@ -39,10 +41,10 @@ public class FloweringAndNotFloweringFull {
 
     public static void main (String args[]) throws Exception {
         String labeledPath = System.getProperty("user.home")+"/datasets/fanfMid/";
-        int numNF = 1000;
-        int numF = 1000;
-        int numInputRows = 28;
-        int numInputCols = 28;
+        int numNF = 100;
+        int numF = 100;
+        int numInputRows = 50;
+        int numInputCols = 50;
         int numImages = numF + numNF;
         List<String> labels = new ArrayList<>();
 
@@ -52,7 +54,6 @@ public class FloweringAndNotFloweringFull {
 
         final int numEpochs = 20;
         final int miniBatchSize = 100;
-        Evaluation evaluation = new Evaluation();
 
         log.info("Loading labels");
         for(File f : new File(labeledPath).listFiles()) {
@@ -64,7 +65,7 @@ public class FloweringAndNotFloweringFull {
 
         log.info("Loading data");
 
-        RecordReader recordReader = new ImageRecordReader(numInputRows, numInputCols, true, labels);
+        RecordReader recordReader = new ImageRecordReader(numInputRows, numInputCols, true);
         recordReader.initialize(new FileSplit(new File(labeledPath)));
         DataSetIterator dataSetIterator = new RecordReaderDataSetIterator(recordReader, numImages, numInput, labels.size());
         Nd4j.ENFORCE_NUMERICAL_STABILITY = true;
@@ -73,43 +74,38 @@ public class FloweringAndNotFloweringFull {
 
 
         MultiLayerConfiguration multiLayerConfiguration = new NeuralNetConfiguration.Builder()
+                .weightInit(WeightInit.DISTRIBUTION)
+                .dist(new NormalDistribution(0,0.01))
+                .seed(seed).constrainGradientToUnitNorm(true)
+                .iterations(iterations) .updater(Updater.ADAGRAD)
+                .momentum(0.5)
+                .maxNumLineSearchIterations(10)
+                .momentumAfter(Collections.singletonMap(3, 0.9))
                 .optimizationAlgo(OptimizationAlgorithm.CONJUGATE_GRADIENT)
-                .seed(seed)
-                .iterations(iterations)
-                .maxNumLineSearchIterations(10) // Magical Optimisation Stuff
-                .activationFunction("relu")
-                .k(1) // Annoying dl4j bug that is yet to be fixed.
-                .weightInit(WeightInit.XAVIER)
-                .constrainGradientToUnitNorm(true)
-                .hiddenUnit(RBM.HiddenUnit.RECTIFIED)
-                .regularization(true)
-                .visibleUnit(RBM.VisibleUnit.GAUSSIAN)
-                .list(4)
-                .layer(0, new RBM.Builder().nIn(numInput).nOut(500).build())
-                .layer(1, new RBM.Builder().nIn(500).nOut(250).build())
-                .layer(2, new RBM.Builder().nIn(250).nOut(100).build())
-                .layer(3, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT).activation("softmax")
-                        .nIn(100).nOut(numOut).build())
-                        // Pretrain is unsupervised pretraining and finetuning on output layer
-                        // Backward is full propagation on ALL layers.
-                .pretrain(false).backprop(true)
+                .visibleUnit(RBM.VisibleUnit.BINARY)
+                .hiddenUnit(RBM.HiddenUnit.BINARY)
+                .list(7).
+                        layer(0, new RBM.Builder().nIn(numInput).nOut(2500).build())
+                        .layer(1, new RBM.Builder().nIn(2500).nOut(2000).build())
+                        .layer(2, new RBM.Builder().nIn(2000).nOut(1500).build())
+                        .layer(3, new RBM.Builder().nIn(1500).nOut(1000).build())
+                        .layer(4, new RBM.Builder().nIn(1000).nOut(500).build())
+                        .layer(5, new RBM.Builder().nIn(500).nOut(250).build())
+                        .layer(6, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT)
+                                .activation("softmax").nIn(250).nOut(numOut).build())
+                .pretrain(true)
+                .backprop(false)
                 .build();
 
         MultiLayerNetwork multiLayerNetwork = new MultiLayerNetwork(multiLayerConfiguration);
         multiLayerNetwork.init();
-
-        multiLayerNetwork.setListeners(Arrays.<IterationListener>asList(new ScoreIterationListener(1), new GradientPlotterIterationListener(5)));
-
+        multiLayerNetwork.setListeners(Collections.singletonList((IterationListener) new ScoreIterationListener(1)));
         log.info("Splitting dataset - This may take awhile, depending on the input");
 
-        DataSet allData = new DataSet();
-        // Loading Entirety of dataSetIterator into memory.
-        while(dataSetIterator.hasNext()) {
-            allData = dataSetIterator.next();
-        }
-
+        DataSet allData = dataSetIterator.next();
         SplitTestAndTrain splitTestAndTrain = allData.splitTestAndTrain(0.9);
         DataSet trainingData = splitTestAndTrain.getTrain();
+        DataSet testingData = splitTestAndTrain.getTest();
 
         log.info("Training Network");
 
@@ -122,11 +118,13 @@ public class FloweringAndNotFloweringFull {
 
         log.info("Evaluating Network");
 
-        DataSet testingData = splitTestAndTrain.getTest();
-        INDArray predict = multiLayerNetwork.output(testingData.getFeatureMatrix());
+        Evaluation evaluation = new Evaluation(numOut);
 
-        evaluation.eval(testingData.getLabels(), predict);
+        INDArray predict2 = multiLayerNetwork.output(testingData.getFeatureMatrix());
+        evaluation.eval(testingData.getLabels(),predict2);
 
         log.info(evaluation.stats());
+
+
     }
 }
