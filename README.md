@@ -32,7 +32,7 @@ After that, load the ```nnfptc``` project into IntelliJ, or whatever IDE you use
 
 ## Fanf
 
-'''
+```
 Using gpu device 0: Quadro K2200
 X_train shape: (14850, 3, 64, 64)
 Y_train shape: (14850, 2)
@@ -155,4 +155,4 @@ Epoch  28
 Training
 14800/14850 [============================>.] - ETA: 0s - train loss: 0.0293 - train accuracy:: 0.9907Valid
 1648/1648 [==============================] - 5s     
-'''
+```
