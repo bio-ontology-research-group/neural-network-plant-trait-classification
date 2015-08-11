@@ -88,7 +88,7 @@ model.add(Dropout(0.5))
 model.add(Dense(100, nb_classes))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.1, decay=0.01, momentum=0.9, nesterov=True)
+sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='mse', optimizer=sgd)
 
 
