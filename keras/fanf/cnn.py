@@ -15,7 +15,7 @@ from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.advanced_activations import PReLU
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
-from keras.optimizers import SGD, Adadelta, Adagrad
+from keras.optimizers import *
 from keras.utils import np_utils, generic_utils
 from six.moves import *
 import random,cPickle
@@ -23,8 +23,8 @@ from data import load_colour_images
 import numpy as np
 
 
-np.random.seed(1993)
-nb_epoch = 20
+np.random.seed(1337) # Reproducable results :)
+nb_epoch = 40
 batch_size = 100
 nb_classes = 2
 
@@ -63,40 +63,41 @@ model.add(Activation('relu'))
 model.add(MaxPooling2D(poolsize=(2, 2)))
 model.add(Dropout(0.25))
 
-model.add(Convolution2D(128, 64, 3, 3, border_mode='full'))
-model.add(Activation('relu'))
-model.add(Convolution2D(128, 128, 3, 3))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(poolsize=(2, 2)))
-model.add(Dropout(0.25))
-
-model.add(Convolution2D(128, 128, 3, 3, border_mode='full'))
-model.add(Activation('relu'))
-model.add(Convolution2D(128, 128, 3, 3))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(poolsize=(2, 2)))
-model.add(Dropout(0.25))
-
 model.add(Flatten())
-model.add(Dense(8192, 100))
+model.add(Dense(65536, 128))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
-
-
-
-model.add(Dense(100, nb_classes))
+model.add(Dense(128, nb_classes))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
-model.compile(loss='mse', optimizer=sgd)
+rms = Adadelta()
+model.compile(loss='categorical_crossentropy', optimizer=rms)
+
 
 
 nb_train = len(Y_train)
 nb_validation = len(Y_val)
 print( 'train samples:',nb_train, 'validation samples:',nb_validation)
 
+best_accuracy = 0.0
 
-model.fit(X_train, y_train, batch_size=batch_size, nb_epoch=nb_epoch, show_accuracy=True, verbose=1, validation_data=(X_val, y_val))
-score = model.evaluate(X_train, y_train, show_accuracy=True, verbose=0)
-print (score[0])
+for e in range(nb_epoch):
+    print ('Epoch ', e)
+    print ('Training')
+    batch_num = len(y_train)/batch_size
+    progbar = generic_utils.Progbar(X_train.shape[0])
+    for i in range(batch_num):
+        train_loss,train_accuracy = model.train(X_train[i*batch_size:(i+1)*batch_size], Y_train[i*batch_size:(i+1)*batch_size], accuracy=True)
+        progbar.add(batch_size, values=[("train loss", train_loss), ("train accuracy:", train_accuracy)] )
+
+    print('Valid')
+    val_loss,val_accuracy = model.evaluate(X_val, y_val, batch_size=1,show_accuracy=True)
+
+    if best_accuracy < val_accuracy:
+        best_accuracy = val_accuracy
+        # cPickle.dump(model,open("./model.pkl","wb"))
+
+# model.fit(X_train, y_train, batch_size=batch_size, nb_epoch=nb_epoch, show_accuracy=True, verbose=1, validation_data=(X_val, y_val))
+# score = model.evaluate(X_train, y_train, show_accuracy=True, verbose=0)
+#print (score[0])
