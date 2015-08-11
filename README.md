@@ -30,4 +30,128 @@ After that, load the ```nnfptc``` project into IntelliJ, or whatever IDE you use
 16. Leaf - Margin
 
 
+## Fanf
+
+Using gpu device 0: Quadro K2200
+X_train shape: (14850, 3, 64, 64)
+Y_train shape: (14850, 2)
+train samples: 14850 validation samples: 1648
+Epoch  0
+Training
+/usr/local/lib/python2.7/dist-packages/keras/models.py:339: UserWarning: The "train" method is deprecated, use "train_on_batch" instead.
+  warnings.warn('The "train" method is deprecated, use "train_on_batch" instead.')
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.6655 - train accuracy:: 0.6597Valid
+1648/1648 [==============================] - 6s     
+Epoch  1
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.5076 - train accuracy:: 0.7493Valid
+1648/1648 [==============================] - 6s     
+Epoch  2
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.4636 - train accuracy:: 0.7788Valid
+1648/1648 [==============================] - 6s     
+Epoch  3
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.4314 - train accuracy:: 0.7961Valid
+1648/1648 [==============================] - 6s     
+Epoch  4
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.4052 - train accuracy:: 0.8139Valid
+1648/1648 [==============================] - 6s     
+Epoch  5
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.3764 - train accuracy:: 0.8318Valid
+1648/1648 [==============================] - 6s     
+Epoch  6
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.3362 - train accuracy:: 0.8502Valid
+1648/1648 [==============================] - 5s     
+Epoch  7
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.3024 - train accuracy:: 0.8694Valid
+1648/1648 [==============================] - 5s      
+Epoch  8
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.2528 - train accuracy:: 0.8923Valid
+1648/1648 [==============================] - 5s     
+Epoch  9
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.2214 - train accuracy:: 0.9103Valid
+1648/1648 [==============================] - 5s     
+Epoch  10
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.1786 - train accuracy:: 0.9331Valid
+1648/1648 [==============================] - 6s     
+Epoch  11
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.1419 - train accuracy:: 0.9447Valid
+1648/1648 [==============================] - 5s     
+Epoch  12
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.1160 - train accuracy:: 0.9572Valid
+1648/1648 [==============================] - 6s     
+Epoch  13
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.1191 - train accuracy:: 0.9556Valid
+1648/1648 [==============================] - 5s     
+Epoch  14
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0880 - train accuracy:: 0.9678Valid
+1648/1648 [==============================] - 5s      
+Epoch  15
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0762 - train accuracy:: 0.9725Valid
+1648/1648 [==============================] - 5s     
+Epoch  16
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0631 - train accuracy:: 0.9778Valid
+1648/1648 [==============================] - 5s     
+Epoch  17
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0602 - train accuracy:: 0.9776Valid
+1648/1648 [==============================] - 5s     
+Epoch  18
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0522 - train accuracy:: 0.9823Valid
+1648/1648 [==============================] - 5s      
+Epoch  19
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0445 - train accuracy:: 0.9844Valid
+1648/1648 [==============================] - 5s     
+Epoch  20
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0450 - train accuracy:: 0.9852Valid
+1648/1648 [==============================] - 5s     
+Epoch  21
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0380 - train accuracy:: 0.9864Valid
+1648/1648 [==============================] - 5s     
+Epoch  22
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0339 - train accuracy:: 0.9877Valid
+1648/1648 [==============================] - 5s     
+Epoch  23
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0346 - train accuracy:: 0.9878Valid
+1648/1648 [==============================] - 6s     
+Epoch  24
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0364 - train accuracy:: 0.9866Valid
+1648/1648 [==============================] - 6s     
+Epoch  25
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0321 - train accuracy:: 0.9881Valid
+1648/1648 [==============================] - 6s     
+Epoch  26
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0301 - train accuracy:: 0.9901Valid
+1648/1648 [==============================] - 5s     
+Epoch  27
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0253 - train accuracy:: 0.9907Valid
+1648/1648 [==============================] - 5s     
+Epoch  28
+Training
+14800/14850 [============================>.] - ETA: 0s - train loss: 0.0293 - train accuracy:: 0.9907Valid
+1648/1648 [==============================] - 5s     
 
