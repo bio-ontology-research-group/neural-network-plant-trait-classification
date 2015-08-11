@@ -1,4 +1,4 @@
-	# neural-network-plant-trait-classification
+# neural-network-plant-trait-classification
 
 ## Installation
 Getting this project set up is a fairly simple task that will only take a few minutes of your time.
@@ -31,6 +31,7 @@ After that, load the ```nnfptc``` project into IntelliJ, or whatever IDE you use
 
 
 ## Fanf
+
 '''
 Using gpu device 0: Quadro K2200
 X_train shape: (14850, 3, 64, 64)
