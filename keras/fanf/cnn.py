@@ -3,6 +3,7 @@
 '''
     GPU run command:
         THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python cnn.py
+        THEANO_FLAGS='cuda.root=/usr/local/cuda'=mode=FAST_RUN,device=gpu,floatX=float32 python cnn.py
     CPU run command:
         python cnn.py
 '''
@@ -19,17 +20,16 @@ from keras.utils import np_utils, generic_utils
 from six.moves import *
 import random,cPickle
 from data import load_colour_images
+import numpy as np
 
 
-
-
-nb_epoch = 12
+np.random.seed(1993)
+nb_epoch = 20
 batch_size = 100
 nb_classes = 2
 
 data, label0 = load_colour_images("/home/osheak/datasets/fanfMid/imageFiles/test_RGB_plus/")
 num = len(label0)
-random.seed(12345)
 index = [i for i in range(num)]
 random.shuffle(index)
 data = data[index]
@@ -43,12 +43,10 @@ Y_train = label[0 : 14850]
 X_val = data[0: 1648]
 Y_val = label[0: 1648]
 
-X_train = X_train.reshape(X_train.shape[0], 3, 28, 28)
-X_val = X_val.reshape(X_val.shape[0], 3, 28, 28)
+X_train = X_train.reshape(X_train.shape[0], 3, 64, 64)/255
+X_val = X_val.reshape(X_val.shape[0], 3, 64, 64)/255
 X_train = X_train.astype("float32")
 X_val = X_val.astype("float32")
-X_train /= 255
-X_val /= 255
 
 print('X_train shape:', X_train.shape)
 print('Y_train shape:', Y_train.shape)
@@ -58,22 +56,40 @@ y_val = np_utils.to_categorical(Y_val, nb_classes)
 
 model = Sequential()
 
-model.add(Convolution2D(32, 3, 3, 3, border_mode='full'))
+model.add(Convolution2D(64, 3, 3, 3, border_mode='full'))
 model.add(Activation('relu'))
-model.add(Convolution2D(32, 32, 3, 3))
+model.add(Convolution2D(64, 64, 3, 3))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(poolsize=(2, 2)))
+model.add(Dropout(0.25))
+
+model.add(Convolution2D(128, 64, 3, 3, border_mode='full'))
+model.add(Activation('relu'))
+model.add(Convolution2D(128, 128, 3, 3))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(poolsize=(2, 2)))
+model.add(Dropout(0.25))
+
+model.add(Convolution2D(128, 128, 3, 3, border_mode='full'))
+model.add(Activation('relu'))
+model.add(Convolution2D(128, 128, 3, 3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(poolsize=(2, 2)))
 model.add(Dropout(0.25))
 
 model.add(Flatten())
-model.add(Dense(32*196, 128))
+model.add(Dense(8192, 100))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
-model.add(Dense(128, nb_classes))
+
+
+
+model.add(Dense(100, nb_classes))
 model.add(Activation('softmax'))
 
-model.compile(loss='categorical_crossentropy', optimizer='adadelta')
+sgd = SGD(lr=0.1, decay=0.01, momentum=0.9, nesterov=True)
+model.compile(loss='mse', optimizer=sgd)
 
 
 nb_train = len(Y_train)

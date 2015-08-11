@@ -34,7 +34,7 @@ def tosquare(img):
 	if height<width:
 		black_len = (width - height)/2
 		imgarray = np.asarray(img)
-		newarray = np.zeros((28,28,3),dtype="uint8")
+		newarray = np.zeros((64,64,3),dtype="uint8")
 		newarray[black_len:black_len+height,:,:]=imgarray[:,:,:]
 		img = Image.fromarray(newarray,"RGB")
 	if height>width:
@@ -56,6 +56,6 @@ if __name__ == "__main__":
         img = Image.open(directory+"/"+imgname)
         img = crop(img)
         width,height = img.size
-        img = img.resize((28,28*height/width))
+        img = img.resize((64,64*height/width))
         img = tosquare(img)
         img.save(save_path  +imgname)

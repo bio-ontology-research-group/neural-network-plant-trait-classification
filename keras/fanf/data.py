@@ -20,7 +20,7 @@ def load_colour_images(directory="/home/osheak/datasets/fanfMid/imageFiles/test_
     imgs = os.listdir(directory)
     num = len(imgs)
     table = get_trainlabel()
-    traindata = np.empty((num,3,28,28),dtype="float32")
+    traindata = np.empty((num,3,64,64),dtype="float32")
     traindata.flatten()
     trainlabel = np.empty((num,),dtype="uint8")
     for i in range(num):
