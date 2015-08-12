@@ -15,7 +15,7 @@ def get_trainlabel():
         for traits in traitsReader:
             table[traits[0]] = int(traits[1])
         return table
-
+    
 def load_colour_images(directory="/home/osheak/datasets/fanfMid/imageFiles/test_RGB_Plus/"):
     imgs = os.listdir(directory)
     num = len(imgs)
