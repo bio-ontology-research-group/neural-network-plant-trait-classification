@@ -45,17 +45,20 @@ def tosquare(img):
 
 
 if __name__ == "__main__":
-    directory = "/home/osheak/datasets/fanfMid/imageFiles/imageFiles/"
-    save_path = "/home/osheak/datasets/fanfMid/imageFiles/test_RGB/"
+    directory = "/home/osheak/datasets/fanfMid/imageFiles/numberedFolders/"
+    save_path = "/home/osheak/datasets/fanfMid/imageFiles/numberedFoldersTest/"
     if not os.path.exists(save_path):
-        os.makedirs("/home/osheak/datasets/fanfMid/imageFiles/test_RGB/")
-    imglist = os.listdir(directory)
-    for i in xrange(len(imglist)):
-        imgname = imglist[i]
-        print imgname
-        img = Image.open(directory+"/"+imgname)
-        img = crop(img)
-        width,height = img.size
-        img = img.resize((64,64*height/width))
-        img = tosquare(img)
-        img.save(save_path  +imgname)
+        os.makedirs("/home/osheak/datasets/fanfMid/imageFiles/numberedFoldersTest/")
+	for root, dirs, files in os.walk(directory):
+		for name in files:
+			if name.endswith((".jpg", ".JPG")):
+				print name
+    # for i in xrange(len(imglist)):
+    #     imgname = imglist[i]
+    #     print imgname
+    #     img = Image.open(directory+"/"+imgname)
+    #     img = crop(img)
+    #     width,height = img.size
+    #     img = img.resize((64,64*height/width))
+    #     img = tosquare(img)
+    #     img.save(save_path  +imgname)
