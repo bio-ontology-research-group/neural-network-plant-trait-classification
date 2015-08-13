@@ -58,7 +58,7 @@ if __name__ == "__main__":
 		os.makedirs(save_path)
 	imglist = load_directories(directory)
 	for imgname in imglist:
-		print imgname[1]
+
 		img = Image.open(directory+imgname[0]+"/"+imgname[1])
 		img = crop(img)
 		width,height = img.size

@@ -28,7 +28,7 @@ nb_epoch = 40
 batch_size = 100
 nb_classes = 2
 
-data, label0 = load_colour_images("/home/osheak/datasets/fanfMid/imageFiles/test_RGB_plus/")
+data, label0 = load_colour_images("/home/osheak/datasets/fanfMid/imageFiles/numberedFoldersTest/")
 num = len(label0)
 index = [i for i in range(num)]
 random.shuffle(index)

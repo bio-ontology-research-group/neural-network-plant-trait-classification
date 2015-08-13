@@ -20,7 +20,7 @@ def load_colour_images(directory="/home/osheak/datasets/fanfMid/imageFiles/numbe
     traindata.flatten()
     trainlabel = np.empty((num,),dtype="uint8")
     for i, imgname in enumerate(imglist):
-        img = Image.open(directory+imgname[0]+"/"+imgname[1])
+        img = Image.open(directory+"/"+imgname[0]+"/"+imgname[1])
         arr = np.asarray(img, dtype="float32")
         traindata[i,:,:,:] = [arr[:,:,0],arr[:,:,1],arr[:,:,2]]
         trainlabel[i] = imgname[0]
