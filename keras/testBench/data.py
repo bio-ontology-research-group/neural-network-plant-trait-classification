@@ -13,7 +13,7 @@ def load_directories(directory):
 			imglist.append([label, filename])
 	return imglist
 
-def load_colour_images(directory="/home/osheak/datasets/fanfMid/imageFiles/numberedFoldersTest/"):
+def load_colour_images(directory):
     imglist = load_directories(directory)
     num = len(imglist)
     traindata = np.empty((num, 3, 64, 64), dtype="float32")
