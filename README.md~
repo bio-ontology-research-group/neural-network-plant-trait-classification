@@ -12,9 +12,6 @@ To install pip on a Ubuntu system, simply run the following command in the comma
 ```bash
 sudo apt-get install python-pip python-dev build-essential
 ```
-
-**Note:** This project was made using Python **2.7.6**.
-
 Now that this is set up, you're going to need to install a few dependencies first.
 
 1. **numpy and scipy:** ```sudo pip install scipy```
