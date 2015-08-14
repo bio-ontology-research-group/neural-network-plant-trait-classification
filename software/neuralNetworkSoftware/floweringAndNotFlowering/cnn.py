@@ -8,51 +8,35 @@
         python cnn.py
 '''
 
-from __future__ import absolute_import
-from __future__ import print_function
-from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
-from keras.layers.advanced_activations import PReLU
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import *
 from keras.utils import np_utils, generic_utils
-from six.moves import *
-import random,cPickle
-from data import load_colour_images
-import numpy as np
+import random, cPickle, imp, numpy as np
 
+dataset_getter = imp.load_source('dataset', '../../pyvec/pyvec/images/dataset.py')
 
 np.random.seed(1337) # Reproducable results :)
-nb_epoch = 40
+
+custom_height = 64
+custom_width = 64
+
+num_epoch = 40
 batch_size = 100
-nb_classes = 2
+num_classes = 2
 
-data, label0 = load_colour_images("/home/osheak/datasets/fanfMid/imageFiles/numberedFoldersTest/")
-num = len(label0)
-index = [i for i in range(num)]
-random.shuffle(index)
-data = data[index]
-label0 = label0[index]
+num_training_data = 14850
+num_validation_data = 1648
 
-label = np_utils.to_categorical(label0, nb_classes)
+# I have already preprocessed the data, if you haven't done this please look at the examples
+# provided with pyvec: https://github.com/KeironO/Pyvec/blob/master/examples/loadingImages/loading_images.py
+directory = "/home/osheak/datasets/fanfMid/imageFiles/numberedFoldersTest/"
 
-X_train =  data[0: 14850]
-Y_train = label[0 : 14850]
-
-X_val = data[0: 1648]
-Y_val = label[0: 1648]
-
-X_train = X_train.reshape(X_train.shape[0], 3, 64, 64)/255
-X_val = X_val.reshape(X_val.shape[0], 3, 64, 64)/255
-X_train = X_train.astype("float32")
-X_val = X_val.astype("float32")
-
-print('X_train shape:', X_train.shape)
-print('Y_train shape:', Y_train.shape)
-
-y_train = np_utils.to_categorical(Y_train, nb_classes)
-y_val = np_utils.to_categorical(Y_val, nb_classes)
+X_train, Y_train, X_val, Y_val = dataset_getter.vectorise(directory,num_classes,custom_height,
+                                                                custom_width,num_training_data,num_validation_data)
+y_train = np_utils.to_categorical(Y_train, num_classes)
+y_val = np_utils.to_categorical(Y_val, num_classes)
 
 model = Sequential()
 
@@ -68,13 +52,11 @@ model.add(Dense(65536, 128))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
-model.add(Dense(128, nb_classes))
+model.add(Dense(128, num_classes))
 model.add(Activation('softmax'))
 
 rms = Adadelta()
 model.compile(loss='categorical_crossentropy', optimizer=rms)
-
-
 
 nb_train = len(Y_train)
 nb_validation = len(Y_val)
@@ -82,7 +64,7 @@ print( 'train samples:',nb_train, 'validation samples:',nb_validation)
 
 best_accuracy = 0.0
 
-for e in range(nb_epoch):
+for e in range(num_epoch):
     print ('Epoch ', e)
     print ('Training')
     batch_num = len(y_train)/batch_size
@@ -96,8 +78,3 @@ for e in range(nb_epoch):
 
     if best_accuracy < val_accuracy:
         best_accuracy = val_accuracy
-        # cPickle.dump(model,open("./model.pkl","wb"))
-
-# model.fit(X_train, y_train, batch_size=batch_size, nb_epoch=nb_epoch, show_accuracy=True, verbose=1, validation_data=(X_val, y_val))
-# score = model.evaluate(X_train, y_train, show_accuracy=True, verbose=0)
-#print (score[0])
