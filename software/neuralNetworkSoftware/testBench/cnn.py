@@ -19,7 +19,7 @@ from keras.optimizers import *
 from keras.utils import np_utils, generic_utils
 from six.moves import *
 import random,cPickle
-from data import load_colour_images
+from data import vectorise
 import numpy as np
 
 
@@ -30,28 +30,8 @@ nb_classes = 2
 
 directory = "/home/osheak/datasets/fanfMid/imageFiles/numberedFoldersTest"
 
-data, label0 = load_colour_images(directory)
-num = len(label0)
-index = [i for i in range(num)]
-random.shuffle(index)
-data = data[index]
-label0 = label0[index]
 
-label = np_utils.to_categorical(label0, nb_classes)
-
-X_train =  data[0: 14850]
-Y_train = label[0 : 14850]
-
-X_val = data[0: 1648]
-Y_val = label[0: 1648]
-
-X_train = X_train.reshape(X_train.shape[0], 3, 64, 64)/255
-X_val = X_val.reshape(X_val.shape[0], 3, 64, 64)/255
-X_train = X_train.astype("float32")
-X_val = X_val.astype("float32")
-
-print('X_train shape:', X_train.shape)
-print('Y_train shape:', Y_train.shape)
+X_train, Y_train, X_val, Y_val = vectorise(directory,nb_classes, 64, 64)
 
 y_train = np_utils.to_categorical(Y_train, nb_classes)
 y_val = np_utils.to_categorical(Y_val, nb_classes)
@@ -75,8 +55,6 @@ model.add(Activation('softmax'))
 
 rms = Adadelta()
 model.compile(loss='categorical_crossentropy', optimizer=rms)
-
-
 
 nb_train = len(Y_train)
 nb_validation = len(Y_val)
