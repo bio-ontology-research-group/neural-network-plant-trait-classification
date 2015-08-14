@@ -2,13 +2,44 @@
 # Symmetry of the flower bilateral vs radial 
 
 - 12,200 images in total
-- 4890 images showing bilateral plants
-- 7310 images showing radial plants
+- 4,890 images showing bilateral plants
+- 7,310 images showing radial plants
 
 
+## Configuration
 
+- Number for training: 10,980
+- Number for validation: 1,219
 
-('train samples:', 10980, 'validation samples:', 1219)
+```python2
+
+model = Sequential()
+
+model.add(Convolution2D(64, 3, 3, 3, border_mode='full'))
+model.add(Activation('relu'))
+model.add(Convolution2D(64, 64, 3, 3))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(poolsize=(2, 2)))
+model.add(Dropout(0.25))
+
+model.add(Flatten())
+model.add(Dense(65536, 128))
+model.add(Activation('relu'))
+model.add(Dropout(0.5))
+
+model.add(Dense(128, nb_classes))
+model.add(Activation('softmax'))
+
+rms = Adadelta()
+model.compile(loss='categorical_crossentropy', optimizer=rms)
+
+```
+
+## Results
+
+```
+
+train samples: 10980 validation samples: 1219
 ('Epoch ', 0)
 Training...
 10900/10980 [============================>.] - ETA: 0s - train loss: 0.7579 - train accuracy:: 0.5929  
@@ -209,3 +240,5 @@ Training...
 10900/10980 [============================>.] - ETA: 0s - train loss: 0.0281 - train accuracy:: 0.9915  
 Running a little validation...
 1219/1219 [==============================] - 1s 
+
+'''
