@@ -51,7 +51,8 @@ def make_csv_array(uncrapified_array):
 def save_file_structure(new_csv):
     out = open("./createdFiles/fileAndFlowerColour.csv", "wb")
     for items in new_csv:
-        out.write(items[4]+"\t"+items[5]+"\n")
+        if items[4] != "Flower - Colour":
+            out.write(items[4]+","+items[5]+"\n")
     out.close()
 
 
