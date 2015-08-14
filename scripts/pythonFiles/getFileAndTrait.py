@@ -1,7 +1,7 @@
 import csv,re
 from collections import defaultdict
 
-def create_traits_dictonary(traits_file):
+def create_traits_dictonary(traits_file, trait):
     traits_dictonary = {}
     with open(traits_file,"rb") as traits_f:
         traits_reader = csv.reader(traits_f, delimiter="\t", lineterminator="\n")
@@ -9,7 +9,7 @@ def create_traits_dictonary(traits_file):
         previous_trait = None #Removal of weird double traits.
         for rows in traits_reader:
             if previous_trait != None and rows[3] != previous_trait:
-                if rows[3] == "Flower - Colour":
+                if rows[3] == trait:
                     if rows[1] not in traits_dictonary:
                         traits_dictonary[rows[1]] = []
                     traits_dictonary[rows[1]].append(rows)
@@ -48,20 +48,21 @@ def make_csv_array(uncrapified_array):
     new_csv = csv.reader(uncrapified_array, delimiter="\t", lineterminator="\n")
     return new_csv
 
-def save_file_structure(new_csv):
-    out = open("./createdFiles/fileAndFlowerColour.csv", "wb")
+def save_file_structure(new_csv, trait):
+    out = open("./createdFiles/"+trait+".csv", "wb")
     for items in new_csv:
-        if items[4] != "Flower - Colour":
+        if items[4] != trait:
             out.write(items[4]+","+items[5]+"\n")
     out.close()
 
 
 if __name__ == "__main__":
+    trait = "Flower - Stamen number"
     traits_file = "./traitsAndPhotos/traits.csv"
     photos_file = "./traitsAndPhotos/photos.csv"
-    traits_dictonary = create_traits_dictonary(traits_file)
+    traits_dictonary = create_traits_dictonary(traits_file, trait)
     photos_list = create_photos_list(photos_file, traits_dictonary)
     uncrapified_array = remove_crap(photos_list)
     new_csv = make_csv_array(uncrapified_array)
-    save_file_structure(new_csv)
+    save_file_structure(new_csv, trait)
 
