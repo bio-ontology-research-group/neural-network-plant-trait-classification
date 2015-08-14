@@ -23,8 +23,7 @@ custom_height = 64
 custom_width = 64
 directory = home_directory + "/datasets/fanf/preProcessed/"
 num_classes = 2
-num_training_data = 14850
-num_validation_data = 1648
+split = 0.9 #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters
 np.random.seed(1337) # Reproducable results :)
@@ -35,7 +34,7 @@ batch_size = 100
 # I have already preprocessed the data, if you haven't done this please look at the examples
 # provided with pyvec: https://github.com/KeironO/Pyvec/blob/master/examples/loadingImages/loading_images.py
 X_train, Y_train, X_val, Y_val = dataset_getter.vectorise(directory,num_classes,custom_height,
-                                                                custom_width,num_training_data,num_validation_data)
+                                                                custom_width, split)
 y_train = np_utils.to_categorical(Y_train, num_classes)
 y_val = np_utils.to_categorical(Y_val, num_classes)
 
