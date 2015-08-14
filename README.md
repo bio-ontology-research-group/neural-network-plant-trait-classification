@@ -28,7 +28,7 @@ And finally, you can install keras using the following command.
 sudo pip install keras
 ```
 
-After that, load the ```keras``` project into Pycharm, or whatever IDE/plain text editor you use and everything should be set up. If not, feel free to [email me](mailto:keo7@aber.ac.uk) or create a [new issue](https://github.com/bio-ontology-research-group/neural-network-plant-trait-classification/issues).
+After that, load the ```software/neuralNetworkSoftware``` project into Pycharm, or whatever IDE/plain text editor you use and everything should be set up. If not, feel free to [email me](mailto:keo7@aber.ac.uk) or create a [new issue](https://github.com/bio-ontology-research-group/neural-network-plant-trait-classification/issues).
 
 ## Running on a GPU
 
