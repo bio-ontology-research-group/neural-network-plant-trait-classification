@@ -1,5 +1,3 @@
-#coding:utf-8
-
 '''
     GPU run command:
         THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python cnn.py
@@ -13,26 +11,29 @@ from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import *
 from keras.utils import np_utils, generic_utils
-import random, cPickle, imp, numpy as np
+from os.path import expanduser
+import  imp, numpy as np
 
 dataset_getter = imp.load_source('dataset', '../../pyvec/pyvec/images/dataset.py')
 
-np.random.seed(1337) # Reproducable results :)
+home_directory = expanduser("~")
 
+# Data Parameters
 custom_height = 64
 custom_width = 64
-
-num_epoch = 40
-batch_size = 100
+directory = home_directory + "/datasets/fanf/preProcessed/"
 num_classes = 2
-
 num_training_data = 14850
 num_validation_data = 1648
 
+# Training Parameters
+np.random.seed(1337) # Reproducable results :)
+num_epoch = 40
+batch_size = 100
+
+
 # I have already preprocessed the data, if you haven't done this please look at the examples
 # provided with pyvec: https://github.com/KeironO/Pyvec/blob/master/examples/loadingImages/loading_images.py
-directory = "/home/osheak/datasets/fanfMid/imageFiles/numberedFoldersTest/"
-
 X_train, Y_train, X_val, Y_val = dataset_getter.vectorise(directory,num_classes,custom_height,
                                                                 custom_width,num_training_data,num_validation_data)
 y_train = np_utils.to_categorical(Y_train, num_classes)
@@ -40,9 +41,9 @@ y_val = np_utils.to_categorical(Y_val, num_classes)
 
 model = Sequential()
 
-model.add(Convolution2D(64, 3, 3, 3, border_mode='full'))
+model.add(Convolution2D(custom_height, 3, 3, 3, border_mode='full'))
 model.add(Activation('relu'))
-model.add(Convolution2D(64, 64, 3, 3))
+model.add(Convolution2D(custom_height, custom_width, 3, 3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(poolsize=(2, 2)))
 model.add(Dropout(0.25))
