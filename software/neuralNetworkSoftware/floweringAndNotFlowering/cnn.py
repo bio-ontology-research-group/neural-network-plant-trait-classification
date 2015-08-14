@@ -66,15 +66,15 @@ best_accuracy = 0.0
 
 for e in range(num_epoch):
     print ('Epoch ', e)
-    print ('Training')
+    print ('Training...')
     batch_num = len(y_train)/batch_size
     progbar = generic_utils.Progbar(X_train.shape[0])
     for i in range(batch_num):
-        train_loss,train_accuracy = model.train(X_train[i*batch_size:(i+1)*batch_size], Y_train[i*batch_size:(i+1)*batch_size], accuracy=True)
+        train_loss,train_accuracy = model.train_on_batch(X_train[i*batch_size:(i+1)*batch_size], Y_train[i*batch_size:(i+1)*batch_size], accuracy=True)
         progbar.add(batch_size, values=[("train loss", train_loss), ("train accuracy:", train_accuracy)] )
 
-    print('Valid')
-    val_loss,val_accuracy = model.evaluate(X_val, y_val, batch_size=1,show_accuracy=True)
+    print('\nRunning a little validation...')
+    val_loss,val_accuracy = model.evaluate(X_val, y_val, batch_size=100,show_accuracy=True)
 
     if best_accuracy < val_accuracy:
         best_accuracy = val_accuracy
