@@ -33,19 +33,34 @@ def create_photos_list(photos_file, traits_dictonary):
                 pass
         return photos_list
 
-def make_photos_list_useful(photos_list):
-    final_array = []
+def remove_crap(photos_list):
+    uncrapified_array = []
     for photos in photos_list:
         removed_crap = re.sub("]]",", ", photos)
         removed_crap = re.sub("\[\[" , ",", removed_crap)
-        final_array.append(removed_crap)
-        print removed_crap
-    return final_array
+        removed_crap = re.sub(", " , "\t", removed_crap)
+        removed_crap = re.sub("," , "", removed_crap)
+        removed_crap = re.sub("\'" , "", removed_crap)
+        uncrapified_array.append(removed_crap)
+    return uncrapified_array
+
+def make_csv_array(uncrapified_array):
+    new_csv = csv.reader(uncrapified_array, delimiter="\t", lineterminator="\n")
+    return new_csv
+
+def save_file_structure(new_csv):
+    out = open("./createdFiles/fileAndFlowerColour.csv", "wb")
+    for items in new_csv:
+        out.write(items[4]+"\t"+items[5]+"\n")
+    out.close()
 
 
 if __name__ == "__main__":
-    traits_file = "../traits.csv"
-    photos_file = "../photos.csv"
+    traits_file = "./traitsAndPhotos/traits.csv"
+    photos_file = "./traitsAndPhotos/photos.csv"
     traits_dictonary = create_traits_dictonary(traits_file)
     photos_list = create_photos_list(photos_file, traits_dictonary)
-    final_array = make_photos_list_useful(photos_list)
+    uncrapified_array = remove_crap(photos_list)
+    new_csv = make_csv_array(uncrapified_array)
+    save_file_structure(new_csv)
+
