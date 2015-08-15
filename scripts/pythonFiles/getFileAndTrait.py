@@ -52,12 +52,12 @@ def save_file_structure(new_csv, trait):
     out = open("./createdFiles/"+trait+".csv", "wb")
     for items in new_csv:
         if items[4] != trait:
-            out.write(items[4]+","+items[5]+"\n")
+            out.write(items[4]+"\t"+items[5]+"\n")
     out.close()
 
 
 if __name__ == "__main__":
-    trait = "Flower - Stamen number"
+    trait = "Flower - Inflorescence"
     traits_file = "./traitsAndPhotos/traits.csv"
     photos_file = "./traitsAndPhotos/photos.csv"
     traits_dictonary = create_traits_dictonary(traits_file, trait)
