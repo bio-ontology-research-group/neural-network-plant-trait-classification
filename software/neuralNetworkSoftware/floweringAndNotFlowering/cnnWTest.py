@@ -22,12 +22,12 @@ home_directory = expanduser("~")
 custom_height = 64
 custom_width = 64
 directory = home_directory + "/datasets/fanf/preProcessed/"
-num_classes = 20
+num_classes = 2
 split = 0.9 #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters
 np.random.seed(1337) # Reproducable results :)
-num_epoch = 2
+num_epoch = 20
 batch_size = 100
 
 
@@ -81,7 +81,7 @@ for e in range(num_epoch):
         train_loss,train_accuracy = model.train_on_batch(X_train[i*batch_size:(i+1)*batch_size], Y_train[i*batch_size:(i+1)*batch_size], accuracy=True)
         progbar.add(batch_size, values=[("Current TL:", train_loss), ("Current A:", train_accuracy)] )
     print "\nRunning a little validation..."
-    val_loss,val_accuracy = model.evaluate(X_val, y_val, batch_size=100,show_accuracy=True)
+    val_loss,val_accuracy = model.evaluate(X_val, y_val, batch_size=1,show_accuracy=True)
 
     if best_validation_accuracy < val_accuracy:
         best_validation_accuracyaccuracy = val_accuracy
