@@ -10,9 +10,8 @@ from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import *
-from keras.utils import np_utils, generic_utils
 from os.path import expanduser
-import  imp, numpy as np
+import imp, numpy as np
 
 dataset_getter = imp.load_source('dataset', '../../pyvec/pyvec/images/dataset.py')
 
@@ -35,18 +34,14 @@ print "Loading the data...\n"
 
 # I have already preprocessed the data, if you haven't done this please look at the examples
 # provided with pyvec: https://github.com/KeironO/Pyvec/blob/master/examples/loadingImages/loading_images.py
-X_train, Y_train, X_val, Y_val, X_test, Y_test = dataset_getter.vectorise(directory,num_classes,custom_height,
-                                                                custom_width, split, True)
-y_train = np_utils.to_categorical(Y_train, num_classes)
-y_val = np_utils.to_categorical(Y_val, num_classes)
-y_test = np_utils.to_categorical(Y_test, num_classes)
+train_data, train_label, val_data, val_label, test_data, test_label = dataset_getter.vectorise\
+                                (directory,num_classes,custom_height,custom_width, split, True)
 
-nb_train = len(Y_train)
-nb_validation = len(Y_val)
-nb_test = len (Y_test)
-print "Images for training: ", nb_train,  "\n", "Images for validation: ", nb_validation, "\n" + "Images for testing: ",  nb_test, "\n"
+print('Train data shape:', train_data.shape)
+print('Validation data shape:', val_data.shape)
+print('Test data shape:', test_data.shape)
 
-print "Creating the model...\n"
+print "\nCreating the model...\n"
 
 model = Sequential()
 
@@ -65,30 +60,16 @@ model.add(Dropout(0.5))
 model.add(Dense(128, num_classes))
 model.add(Activation('softmax'))
 
-rms = Adadelta()
-model.compile(loss='categorical_crossentropy', optimizer=rms)
+ada = Adadelta()
+model.compile(loss='categorical_crossentropy', optimizer=ada)
 
 best_validation_accuracy = 0.0
 
-print "Training on", num_epoch, "epoch/s..."
+print "Doing some training and validation...\n"
+model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
+          show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
 
-for e in range(num_epoch):
-    print "\nEpoch", e
-    print "Training..."
-    batch_num = len(y_train)/batch_size
-    progbar = generic_utils.Progbar(X_train.shape[0])
-    for i in range(batch_num):
-        train_loss,train_accuracy = model.train_on_batch(X_train[i*batch_size:(i+1)*batch_size], Y_train[i*batch_size:(i+1)*batch_size], accuracy=True)
-        progbar.add(batch_size, values=[("Current TL:", train_loss), ("Current A:", train_accuracy)] )
-    print "\nRunning a little validation..."
-    val_loss,val_accuracy = model.evaluate(X_val, y_val, batch_size=1,show_accuracy=True)
-
-    if best_validation_accuracy < val_accuracy:
-        best_validation_accuracyaccuracy = val_accuracy
-
-print "\nBest Validation Accuracy: ", best_validation_accuracy
-
-print "\nTest time!"
-test_loss,test_accuracy = model.evaluate(X_test, y_test, batch_size=1,show_accuracy=True)
-print "\n Final Test Accuracy:",test_accuracy
-
+print "\nAnd now the test (with", len(test_label),"samples)..."
+test_accuracy, validation_accuracy = model.evaluate(test_data, test_label, show_accuracy=True, verbose=1, batch_size=1)
+print "Validation Accuracy:", validation_accuracy
+print "Test Accuracy:", test_accuracy
