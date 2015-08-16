@@ -20,14 +20,14 @@ home_directory = expanduser("~")
 # Data Parameters
 custom_height = 64
 custom_width = 64
-directory = home_directory + "/datasets/fanf/preProcessed/"
+directory = home_directory + "/datasets/fanf/smallTest/"
 num_classes = 2
 split = 0.9 #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters
 np.random.seed(1337) # Reproducable results :)
-num_epoch = 20
-batch_size = 100
+num_epoch = 6
+batch_size = 10
 
 
 print "Loading the data...\n"
@@ -53,7 +53,7 @@ model.add(MaxPooling2D(poolsize=(2, 2)))
 model.add(Dropout(0.25))
 
 model.add(Flatten())
-model.add(Dense(65536, 128))
+model.add(Dense(64*1024, 128))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
@@ -70,6 +70,5 @@ model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
           show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
 
 print "\nAnd now the test (with", len(test_label),"samples)..."
-test_accuracy, validation_accuracy = model.evaluate(test_data, test_label, show_accuracy=True, verbose=1, batch_size=1)
-print "Validation Accuracy:", validation_accuracy
-print "Test Accuracy:", test_accuracy
+score = model.evaluate(test_data, test_label, show_accuracy=True, verbose=1, batch_size=batch_size)
+print "Test Accuracy:", score[1]
