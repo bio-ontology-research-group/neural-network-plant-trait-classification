@@ -1,7 +1,7 @@
 '''
     GPU run command:
         THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python cnn.py
-        THEANO_FLAGS='cuda.root=/usr/local/cuda'=mode=FAST_RUN,device=gpu,floatX=float32 python stamenNoWCnn.py
+        THEANO_FLAGS='cuda.root=/usr/local/cuda'=mode=FAST_RUN,device=gpu,floatX=float32 python cnnWTest.py
     CPU run command:
         python cnn.py
 '''
@@ -26,7 +26,7 @@ split = 0.9 #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters
 np.random.seed(1337) # Reproducable results :)
-num_epoch = 10
+num_epoch = 25
 batch_size = 100
 
 print "Loading the data...\n"
