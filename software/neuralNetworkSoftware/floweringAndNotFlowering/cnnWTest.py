@@ -20,7 +20,7 @@ home_directory = expanduser("~")
 # Data Parameters
 custom_height = 64
 custom_width = 64
-directory = home_directory + "/datasets/fanf/smallTest/"
+directory = home_directory + "/datasets/fanf/preProcessed/"
 num_classes = 2
 split = 0.9 #Split training and validation (90% for training, 10% validation)
 
@@ -34,8 +34,8 @@ print "Loading the data...\n"
 
 # I have already preprocessed the data, if you haven't done this please look at the examples
 # provided with pyvec: https://github.com/KeironO/Pyvec/blob/master/examples/loadingImages/loading_images.py
-train_data, train_label, val_data, val_label, test_data, test_label = dataset_getter.vectorise\
-                                (directory,num_classes,custom_height,custom_width, split, True)
+train_data, train_label, val_data, val_label, test_data, test_label = dataset_getter.vectorise \
+    (directory,num_classes,custom_height,custom_width, split, True)
 
 print('Train data shape:', train_data.shape)
 print('Validation data shape:', val_data.shape)
@@ -45,25 +45,34 @@ print "\nCreating the model...\n"
 
 model = Sequential()
 
-model.add(Convolution2D(custom_height, 3, 3, 3, border_mode='full'))
+model.add(Convolution2D(64, 3, 3, 3, border_mode='full'))
 model.add(Activation('relu'))
-model.add(Convolution2D(custom_height, custom_width, 3, 3))
+model.add(Convolution2D(64, 64, 3, 3))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(poolsize=(2, 2)))
 model.add(Dropout(0.25))
 
+model.add(Convolution2D(128, 64, 3, 3, border_mode='full'))
+model.add(Activation('relu'))
+
+model.add(Convolution2D(128, 128, 3, 3))
+model.add(Activation('relu'))
+
+model.add(MaxPooling2D(poolsize=(2, 2)))
+model.add(Dropout(0.25))
 model.add(Flatten())
-model.add(Dense(64*1024, 128))
+
+model.add(Dense(128*16*16, 1024))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
-model.add(Dense(128, num_classes))
+model.add(Dense(1024, num_classes))
 model.add(Activation('softmax'))
 
-ada = Adadelta()
-model.compile(loss='categorical_crossentropy', optimizer=ada)
+sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
-best_validation_accuracy = 0.0
+model.compile(loss='categorical_crossentropy', optimizer=sgd)
+
 
 print "Doing some training and validation...\n"
 model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
