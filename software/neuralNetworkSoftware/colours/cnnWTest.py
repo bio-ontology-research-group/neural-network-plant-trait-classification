@@ -26,8 +26,8 @@ split = 0.9 #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters
 np.random.seed(1337) # Reproducable results :)
-num_epoch = 6
-batch_size = 10
+num_epoch = 35
+batch_size = 100
 
 print "Loading the data...\n"
 
@@ -70,7 +70,8 @@ model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
-model.compile(loss='categorical_crossentropy', optimizer=sgd)
+adadelta = Adadelta()
+model.compile(loss='categorical_crossentropy', optimizer=adadelta)
 
 
 print "Doing some training and validation...\n"
