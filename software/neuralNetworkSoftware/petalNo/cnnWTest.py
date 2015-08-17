@@ -33,12 +33,11 @@ print "Loading the data...\n"
 
 # I have already preprocessed the data, if you haven't done this please look at the examples
 # provided with pyvec: https://github.com/KeironO/Pyvec/blob/master/examples/loadingImages/loading_images.py
-train_data, train_label, val_data, val_label, test_data, test_label = dataset_getter.vectorise \
-    (directory,num_classes,custom_height,custom_width, split, True)
+train_data, train_label, val_data, val_label = dataset_getter.vectorise \
+    (directory,num_classes,custom_height,custom_width, split)
 
 print('Train data shape:', train_data.shape)
 print('Validation data shape:', val_data.shape)
-print('Test data shape:', test_data.shape)
 
 print "\nCreating the model...\n"
 
@@ -79,5 +78,5 @@ model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
           show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
 
 print "\nAnd now the test (with", len(test_label),"samples)..."
-score = model.evaluate(test_data, test_label, show_accuracy=True, verbose=1, batch_size=batch_size)
+score = model.evaluate(val_data, val_label, show_accuracy=True, verbose=1, batch_size=batch_size)
 print "Test Accuracy:", score[1]
