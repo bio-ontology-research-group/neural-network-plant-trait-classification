@@ -26,8 +26,8 @@ split = 0.9 #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters
 np.random.seed(1337) # Reproducable results :)
-num_epoch = 6
-batch_size = 10
+num_epoch = 20
+batch_size = 100
 
 
 print "Loading the data...\n"
@@ -69,15 +69,14 @@ model.add(Dropout(0.5))
 model.add(Dense(1024, num_classes))
 model.add(Activation('softmax'))
 
-sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+adadelta = adadelata()
+model.compile(loss='categorical_crossentropy', optimizer=adadelta)
 
-model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
-
-print "Doing some training and validation...\n"
+print "Doing some training and validation..", "with: ", num_epoch, " epochs"
 model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
           show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
 
 print "\nAnd now the test (with", len(test_label),"samples)..."
 score = model.evaluate(test_data, test_label, show_accuracy=True, verbose=1, batch_size=batch_size)
-print "Test Accuracy:", score[1]
+print "Test Accuracy: ", score[1]

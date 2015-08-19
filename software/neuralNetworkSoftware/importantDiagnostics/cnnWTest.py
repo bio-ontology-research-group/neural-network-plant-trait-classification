@@ -21,12 +21,12 @@ home_directory = expanduser("~")
 custom_height = 64
 custom_width = 64
 directory = home_directory + "/datasets/importantDiagnostics/preProcessed/"
-num_classes = 7
+num_classes = 9
 split = 0.9 #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters
 np.random.seed(1337) # Reproducable results :)
-num_epoch = 40
+num_epoch = 20
 batch_size = 100
 
 
@@ -74,10 +74,10 @@ adadelta = adadelta()
 model.compile(loss='categorical_crossentropy', optimizer=adadelta)
 
 
-print "Doing some training and validation...\n"
+print "Doing some training and validation..","with: ",num_epoch
 model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
           show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
 
 print "\nAnd now the test (with", len(test_label),"samples)..."
 score = model.evaluate(test_data, test_label, show_accuracy=True, verbose=1, batch_size=batch_size)
-print "Test Accuracy:", score[1], " after: ", num_epoch
+print "Test Accuracy:", score[1]
