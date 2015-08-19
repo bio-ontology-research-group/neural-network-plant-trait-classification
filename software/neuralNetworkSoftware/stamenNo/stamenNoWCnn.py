@@ -1,7 +1,7 @@
 '''
     GPU run command:
         THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python cnn.py
-        THEANO_FLAGS='cuda.root=/usr/local/cuda'=mode=FAST_RUN,device=gpu,floatX=float32 python cnn.py
+        THEANO_FLAGS='cuda.root=/usr/local/cuda'=mode=FAST_RUN,device=gpu,floatX=float32 python stamenNoWCnn.py
     CPU run command:
         python cnn.py
 '''
@@ -20,15 +20,14 @@ home_directory = expanduser("~")
 # Data Parameters
 custom_height = 64
 custom_width = 64
-directory = home_directory + "/datasets/petalNo/preProcessed/"
-num_classes = 8
+directory = home_directory + "/datasets/stamenNo/labeledFolders"
+num_classes = 2
 split = 0.9 #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters
 np.random.seed(1337) # Reproducable results :)
-num_epoch = 40
+num_epoch = 5
 batch_size = 100
-
 
 print "Loading the data...\n"
 
@@ -74,10 +73,11 @@ sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 adadelta = Adadelta()
 model.compile(loss='categorical_crossentropy', optimizer=adadelta)
 
+
 print "Doing some training and validation...\n"
 model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
           show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
 
 print "\nAnd now the test (with", len(test_label),"samples)..."
 score = model.evaluate(test_data, test_label, show_accuracy=True, verbose=1, batch_size=batch_size)
-print "Test Accuracy:", score[1], " after: ", num_epoch
+print "Test Accuracy:", score[1]
