@@ -9,7 +9,7 @@
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
-from keras.optimizers import *
+from keras.optimizers import adadelta
 from os.path import expanduser
 import imp, numpy as np
 
@@ -69,7 +69,7 @@ model.add(Dropout(0.5))
 model.add(Dense(1024, num_classes))
 model.add(Activation('softmax'))
 
-adadelta = adadelata()
+adadelta = adadelta()
 model.compile(loss='categorical_crossentropy', optimizer=adadelta)
 
 
