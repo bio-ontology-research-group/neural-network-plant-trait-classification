@@ -20,9 +20,9 @@ home_directory = expanduser("~")
 # Data Parameters
 custom_height = 64
 custom_width = 64
-directory = home_directory + "/datasets/fruitType/preProcessed/"
+directory = home_directory + "/datasets/fruitType/labeledFolders/"
 num_classes = 6
-split = 0.75 #Split training and validation (90% for training, 10% validation)
+split = 0.7 #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters
 np.random.seed(1337) # Reproducable results :)

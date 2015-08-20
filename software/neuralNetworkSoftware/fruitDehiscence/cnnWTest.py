@@ -20,9 +20,9 @@ home_directory = expanduser("~")
 # Data Parameters
 custom_height = 64
 custom_width = 64
-directory = home_directory + "/datasets/fruitDehiscence/preProcessed/"
+directory = home_directory + "/datasets/fruitDehiscence/labeledFolders/"
 num_classes = 2
-split = 0.75 #Split training and validation (90% for training, 10% validation)
+split = 0.7 #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters
 np.random.seed(1337) # Reproducable results :)
@@ -73,7 +73,7 @@ adadelta = adadelta()
 model.compile(loss='categorical_crossentropy', optimizer=adadelta)
 
 
-print "Doing some training and validation...", " with: ", num_epoch, " epochs"
+print "Doing some training and validation...", " with: "
 model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
           show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
 
