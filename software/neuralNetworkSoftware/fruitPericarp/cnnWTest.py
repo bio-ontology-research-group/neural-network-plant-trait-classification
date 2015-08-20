@@ -70,8 +70,7 @@ model.add(Dense(1024, num_classes))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
-adadelta = adadelta()
-model.compile(loss='categorical_crossentropy', optimizer=adadelta)
+model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
 
 print "Doing some training and validation..", "with: ", num_epoch, " epochs"
