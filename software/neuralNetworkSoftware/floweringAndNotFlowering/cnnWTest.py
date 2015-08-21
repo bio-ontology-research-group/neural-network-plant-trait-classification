@@ -9,7 +9,7 @@
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
-from keras.optimizers import adadelta
+from keras.optimizers import SGD
 from os.path import expanduser
 import imp, numpy as np
 

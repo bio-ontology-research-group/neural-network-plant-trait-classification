@@ -20,7 +20,7 @@ home_directory = expanduser("~")
 # Data Parameters
 custom_height = 64
 custom_width = 64
-directory = home_directory + "/datasets/symmetry/preProcessed/"
+directory = home_directory + "/datasets/leafMargin/labeledFolders/"
 num_classes = 2
 split = 0.70 #Split training and validation (90% for training, 10% validation)
 
