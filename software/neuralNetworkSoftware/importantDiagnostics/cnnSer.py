@@ -71,9 +71,9 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
 
 print "Doing some training and validation..", "with: ", num_epoch, " epochs"
-model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
+model.fit(train_data, train_labels, batch_size=batch_size, nb_epoch=num_epoch,
           show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
 
-print "\nAnd now the test (with", len(test_label),"samples)..."
-score = model.evaluate(test_data, test_label, show_accuracy=True, verbose=1, batch_size=batch_size)
+print "\nAnd now the test (with", len(test_labels),"samples)..."
+score = model.evaluate(test_data, test_labels, show_accuracy=True, verbose=1, batch_size=batch_size)
 print "Test Accuracy: ", score[1]

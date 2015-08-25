@@ -11,6 +11,7 @@ from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD
 from os.path import expanduser
+import os.path
 import imp, numpy as np
 
 dataset_getter = imp.load_source('dataset', '../../pyvec/pyvec/images/dataset.py')
@@ -20,8 +21,8 @@ home_directory = expanduser("~")
 # Data Parameters
 custom_height = 64
 custom_width = 64
-directory = home_directory + "/datasets/colours/preProcessed"
-num_classes = 9
+directory = home_directory + "/datasets/preProcessed/colours"
+num_classes = len([name for name in os.listdir(directory) if os.path.isdir(directory)])
 split = 0.7  #Split training and validation (90% for training, 10% validation)
 
 # Training Parameters

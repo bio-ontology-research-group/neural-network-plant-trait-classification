@@ -26,7 +26,7 @@ def create_photos_list(photos_file, traits_dictonary):
         for photos in photosReader:
             id = photos[1]
             try:
-                if photos[5] != "0" and photos[6] !="1": #not a fruit and is flowering
+                if photos[5] != "54654" and photos[6] !="0040": #not a fruit and is flowering
                     removedCommas = re.sub(",","", str(photos[2])) #Files have commas in them.
                     photos_list.append(str(traits_dictonary[id]) + str(removedCommas))
             except:
@@ -37,12 +37,13 @@ def remove_crap(photos_list):
     uncrapified_array = []
     for photos in photos_list:
         removed_crap = re.sub("]]",", ", photos)
+        removed_crap = re.sub("cyme, dichasium etc." , "cyme dichasium", removed_crap)
         removed_crap = re.sub("\[\[" , ",", removed_crap)
         removed_crap = re.sub(", " , "\t", removed_crap)
         removed_crap = re.sub("," , "", removed_crap)
         removed_crap = re.sub("\'" , "", removed_crap)
-	removed_crap = re.sub("]","", removed_crap)
-	removed_crap = re.sub("\[","", removed_crap)
+        removed_crap = re.sub("]","", removed_crap)
+        removed_crap = re.sub("\[","", removed_crap)
         uncrapified_array.append(removed_crap)
     return uncrapified_array
 
@@ -59,7 +60,7 @@ def save_file_structure(new_csv, trait):
 
 
 if __name__ == "__main__":
-    trait = "Life Form"
+    trait = "Leaf Venation"
     traits_file = "./traitsAndPhotos/traits.csv"
     photos_file = "./traitsAndPhotos/photos.csv"
     traits_dictonary = create_traits_dictonary(traits_file, trait)
