@@ -2,6 +2,8 @@ import nltk, csv, re
 
 array = []
 
+tagged_array = []
+
 with open("/home/osheak/labeledsentences.tsv", "rb") as file:
     file_reader = csv.reader(file, delimiter="\t", lineterminator="\n")
     for rows in file_reader:
@@ -22,9 +24,11 @@ for idx, rows in enumerate(array):
 for rows in array:
     for postagged in rows[3]:
         if postagged[0] == rows[1]:
-            print postagged[0] + "\t" + postagged[1] + "\tQ"
+            tagged_array.append(postagged[0] + "QUALITY")
+            print postagged[0]+ "\tQUALITY"
         elif postagged[0] == rows[2]:
-            print postagged[0] + "\t" + postagged[1] + "\tE"
+            tagged_array.append(postagged[0] + "ENTITY")
+            print postagged[0] + "\tENTITY"
         else:
-            print postagged[0] + "\t" + postagged[1] + "\t0"
-    print "\n"
+            tagged_array.append(postagged[0] + "0")
+            print postagged[0] + "\t0"
