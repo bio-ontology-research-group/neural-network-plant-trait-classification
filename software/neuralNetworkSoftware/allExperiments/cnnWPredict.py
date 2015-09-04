@@ -58,6 +58,8 @@ def get_tests(directory):
     test_list =  os.listdir(directory)
     return test_list
 
+
+
 def run_experiments(model, train_data, train_label, val_data, val_label, test_data, test_label, batch_size, num_epoch):
     model.load_weights("./leafForm.hdf5")
     testY = model.predict_classes(train_data, verbose=0)
