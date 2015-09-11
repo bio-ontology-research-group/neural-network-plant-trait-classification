@@ -10,7 +10,10 @@ from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD
 from os.path import expanduser
+<<<<<<< HEAD
 from sklearn.metrics import confusion_matrix
+=======
+>>>>>>> 8c5b864afece4f0d6d9d0d388362f11227ff9ab2
 import os
 import imp, numpy as np
 
@@ -18,9 +21,15 @@ pyvec_api = imp.load_source('api', '../../pyvec/pyvec/core/api.py')
 
 def load_data(directory, custom_height, custom_width, split, withTest):
     print "Loading the data...\n"
+<<<<<<< HEAD
     train_data, train_label, val_data, val_label, test_data, test_label, image_list, num_classes = pyvec_api.load_images \
         (directory,custom_height,custom_width, split, withTest)
     return train_data, train_label, val_data, val_label, test_data, test_label, image_list, num_classes
+=======
+    train_data, train_label, val_data, val_label, test_data, test_label, num_classes = pyvec_api.load_images \
+        (directory,custom_height,custom_width, split, withTest)
+    return train_data, train_label, val_data, val_label, test_data, test_label, num_classes
+>>>>>>> 8c5b864afece4f0d6d9d0d388362f11227ff9ab2
 
 
 def create_model(num_classes):
@@ -62,11 +71,16 @@ def get_tests(directory):
 def run_experiments(model, train_data, train_label, val_data, val_label, test_data, test_label, batch_size, num_epoch):
     print "Doing some training and validation..", "with: ", num_epoch, " epochs"
     model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
+<<<<<<< HEAD
              show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
+=======
+              show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
+>>>>>>> 8c5b864afece4f0d6d9d0d388362f11227ff9ab2
 
     print "\nAnd now the test (with", len(test_label),"samples)..."
     score = model.evaluate(test_data, test_label, show_accuracy=True, verbose=1, batch_size=batch_size)
     print "Test Accuracy: ", score[1]
+<<<<<<< HEAD
     Ytest = np.nonzero(test_label)
     Ytest = Ytest[1].tolist() 
     YPredict = model.predict_classes(test_data, verbose=0)   
@@ -82,6 +96,11 @@ def test_model(model, data, label, image_list):
     image_label = dict(zip(image_list,testY))
     return image_label
    
+=======
+
+    model.save_weights("leafForm.hdf5", overwrite=True)
+
+>>>>>>> 8c5b864afece4f0d6d9d0d388362f11227ff9ab2
 if __name__ == "__main__":
     home_directory = expanduser("~")
     custom_height = 64
@@ -94,6 +113,7 @@ if __name__ == "__main__":
     num_epoch = 20
     batch_size = 128
 
+<<<<<<< HEAD
    
     for tests in test_list:
         newdir = directory+tests
@@ -126,3 +146,11 @@ if __name__ == "__main__":
         
 
 
+=======
+    for tests in test_list:
+        newdir = directory+tests
+        print "Trait:", tests
+        train_data, train_label, val_data, val_label, test_data, test_label, num_classes = load_data(newdir, custom_height, custom_width, split, withTest)
+        model = create_model(num_classes)
+        run_experiments(model, train_data, train_label, val_data, val_label, test_data, test_label, batch_size, num_epoch)
+>>>>>>> 8c5b864afece4f0d6d9d0d388362f11227ff9ab2

@@ -6,42 +6,38 @@
         python cnn.py
 '''
 
+
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD
 from os.path import expanduser
+import os.path
 import imp, numpy as np
 
-dataset_getter = imp.load_source('dataset', '../../pyvec/pyvec/input/pickled.py')
 
-home_directory = expanduser("~")
 
-# Data Parameters
-custom_height = 64
-custom_width = 64
-directory = home_directory + "/serialisedData/"
-file_name = "importDiagnostics.p"
-num_classes = 9
-split = 0.7 #Split training and validation (90% for training, 10% validation)
+pyvec_api = imp.load_source('api', '../../pyvec/pyvec/core/api.py')
 
-# Training Parameters
-np.random.seed(1337) # Reproducable results :)
-num_epoch = 20
-batch_size = 100
+#batch_size = 100
 
-train_data, train_labels, val_data, val_labels, test_data, test_labels = dataset_getter.pickle_in(directory, file_name)
 print "Loading the data...\n"
 
+height = 64
+width = 64
+directory = '/home/osheak/test'
+habm_data = pyvec_api.load_images_unlabelled(directory, height, width)
 
-print('Train data shape:', train_data.shape)
-print('Validation data shape:', val_data.shape)
-print('Test data shape:', test_data.shape)
+
+#print
+#print('Train data shape:', train_data.shape)
+#print('Validation data shape:', val_data.shape)
+#print('Test data shape:', test_data.shape)
 
 print "\nCreating the model...\n"
 
-model = Sequential()
 
+model = Sequential()
 model.add(Convolution2D(64, 3, 3, 3, border_mode='full'))
 model.add(Activation('relu'))
 model.add(Convolution2D(64, 64, 3, 3))
@@ -63,17 +59,24 @@ model.add(Dense(128*16*16, 1024))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 
-model.add(Dense(1024, num_classes))
+model.add(Dense(1024, 4))
 model.add(Activation('softmax'))
 
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
+#print "Doing some training and validation..", "with: ", num_epoch, " epochs"
+#model.fit(train_data, train_labels, batch_size=batch_size, nb_epoch=num_epoch,
+#          show_accuracy=True, verbose=1, validation_data=(val_data, val_labels))
 
-print "Doing some training and validation..", "with: ", num_epoch, " epochs"
-model.fit(train_data, train_labels, batch_size=batch_size, nb_epoch=num_epoch,
-          show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
+print "testing the model on heb images......\n"
+model.load_weights('leafForm.hdf5')
+habm_labels = model.predict_classes(habm_data)
 
-print "\nAnd now the test (with", len(test_labels),"samples)..."
-score = model.evaluate(test_data, test_labels, show_accuracy=True, verbose=1, batch_size=batch_size)
-print "Test Accuracy: ", score[1]
+print habm_labels
+#save weights
+model.save_weights('fanf_model.hdf5',overwrite=True);
+
+#print "\nAnd now the test (with", len(test_labels),"samples)..."
+#score = model.evaluate(test_data, test_labels, show_accuracy=True, verbose=1, batch_size=batch_size)
+#print "Test Accuracy: ", score[1]

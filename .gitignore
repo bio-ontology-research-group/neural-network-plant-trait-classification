@@ -3,6 +3,7 @@
 *.tsv
 *.txt
 *.DS_Store
+*.h5py
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
 
