@@ -57,7 +57,7 @@ def save_file_structure(new_csv, trait):
 
 
 if __name__ == "__main__":
-    trait = "Flower - Inflorescence"
+    trait = "Flowering and Not Flowering"
     traits_file = "./traitsAndPhotos/traits.csv"
     photos_file = "./traitsAndPhotos/photos.csv"
     traits_dictonary = create_traits_dictonary(traits_file, trait)
