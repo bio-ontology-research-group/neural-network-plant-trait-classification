@@ -64,8 +64,8 @@ def get_tests(directory):
 
 def run_experiments(model, train_data, train_label, val_data, val_label, test_data, test_label, batch_size, num_epoch):
     print "Doing some training and validation..", "with: ", num_epoch, " epochs"
-    #model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
-    #        show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
+    model.fit(train_data, train_label, batch_size=batch_size, nb_epoch=num_epoch,
+            show_accuracy=True, verbose=1, validation_data=(val_data, val_label))
 
     print "\nAnd now the test (with", len(test_label),"samples)..."
     score = model.evaluate(test_data, test_label, show_accuracy=True, verbose=1, batch_size=batch_size)
@@ -76,7 +76,6 @@ def run_experiments(model, train_data, train_label, val_data, val_label, test_da
     YPredict = YPredict.tolist()
     confusion_mat = confusion_matrix(Ytest, YPredict)
     print "confusion matrix: \n",confusion_mat
-    #model.save_weights("leafStructure.hdf5", overwrite=True)
     
     return model
     
@@ -94,7 +93,7 @@ if __name__ == "__main__":
     directory = home_directory + "/datasets/preProcessed/"
     test_list = get_tests(directory)
     withTest = True
-    split = 0.7
+    #split = 0.7
     np.random.seed(1337) # Reproducable results :)
     num_epoch = 20
     batch_size = 128
@@ -109,6 +108,7 @@ if __name__ == "__main__":
         os.makedirs(herb_labels_dir)
 
     for tests in test_list:
+        split = 0.7
         newdir = directory+tests
         print "Trait:", tests
         traits.append(tests)
@@ -118,22 +118,21 @@ if __name__ == "__main__":
         model_name = 'models/'+ tests + '.hdf5'
         learned_model.save_weights(model_name, overwrite=True)
   
-    # apply learned model on herb unlabelled data 
+        # apply learned model on herb unlabelled data 
  
-    newdir = home_directory + "/datasets/predict/herb"
-    test_list = get_tests(newdir)
-    split = 1 #no split
+        newdir = home_directory + "/datasets/predict/herb/sub"
+        test_list = get_tests(newdir)
+        split = 1 #no split
 
-    for tests in traits:
-        print "Trait:", tests 
+        print "Apply the model on Herb.."
         data, label, _, _, _, _, image_list, _ = load_data(newdir, custom_height, custom_width, split, withTest)
-	image_labels = test_model(model, data, label, image_list)
-    
+	image_labels = test_model(learned_model, data, label, image_list)
+        
+	print "save the results...."
        
         file_name = 'herb_labels/'+ tests + '_labels.txt'
         with open(file_name,"w") as file1:
 	    for k,v in image_labels.items():
                 file1.write('\n{}: {}'.format(k,v))
-
 
 
