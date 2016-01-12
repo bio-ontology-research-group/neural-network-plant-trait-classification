@@ -2,7 +2,18 @@
 
 **Update:** Everything before was awful and terrible, so I needed to fix it.
 
-## Installation
+## What this repository contains
+
+```
+.
+├── file_preperation - Folder containing some clever CSV parsing
+├── neural_networks - Folder containing the neural network configurations
+└── README.md - This file, duh.
+
+```
+
+## Installing Keras.
+
 Getting this project set up is a fairly simple task that will only take a few minutes of your time.
 
 The project is now built on the [keras](https://github.com/fchollet/keras) theano-based deep learning library. It's built entirely on simplicity and ease of implementation.
