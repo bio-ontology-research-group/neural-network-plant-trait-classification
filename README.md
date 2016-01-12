@@ -1,6 +1,6 @@
 # Semantic Fine Grained Plant Trait Classification
 
-*Update*: Everything before was awful and terrible, so I needed to fix it.
+**Update:** Everything before was awful and terrible, so I needed to fix it.
 
 ## Installation
 Getting this project set up is a fairly simple task that will only take a few minutes of your time.
