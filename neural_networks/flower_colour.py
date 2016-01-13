@@ -92,10 +92,13 @@ def create_model(input_size, number_of_classes):
     model.compile(loss="multiple_crossentropy", optimizer=sgd)
     return model
 
-def train_model_and_test(number_of_epochs, train_data, train_label, augmented_data_generator):
+def train_model_and_test(number_of_epochs, number_of_classes, train_data, train_label, augmented_data_generator):
+    train_label = np_utils.to_categorical(train_label, number_of_classes)
+
+
     for e in range(number_of_epochs):
         progress_bar = generic_utils.Progbar(train_data.shape[0])
-        for train_d_batch, train_l_batch in augmented_data_generator(train_data):
+        for train_d_batch, train_l_batch in augmented_data_generator(train_data, train_label):
             score = model.train_on_batch(train_d_batch, train_l_batch)
             progress_bar.add(train_d_batch[0], values=[('train loss', score[0])])
 
@@ -116,4 +119,4 @@ if __name__ == "__main__":
 
     model = create_model(input_size, number_of_classes)
 
-    train_model_and_test(number_of_epochs, train_data, train_label, augmented_data_generator)
+    train_model_and_test(number_of_epochs, number_of_classes, train_data, train_label, augmented_data_generator)
