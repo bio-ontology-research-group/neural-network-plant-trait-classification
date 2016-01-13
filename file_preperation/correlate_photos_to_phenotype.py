@@ -30,14 +30,15 @@ def correlate_photos_file_to_traits_info(photos_file, traits_dict):
     trait_and_file_list = []
     for rows in photos_file:
         species_id = rows[1]
-        try:
-            trait_and_file_list.append([str(traits_dict[species_id]), rows[2]])
-        except:
-            pass
+        if rows[5] != "0" and rows[6] != "1": # If not a fruit and is flowering
+            try:
+                trait_and_file_list.append([str(traits_dict[species_id]), rows[2]])
+            except:
+                pass
     return trait_and_file_list
 
 def list_to_csv_file(trait, trait_file_and_list):
-    save_file = open(trait+".tsv", "wb")
+    save_file = open("./labels/"+trait+".tsv", "wb")
     csv_writer = csv.writer(save_file, delimiter="\t", lineterminator="\n")
 
     for files in trait_file_and_list:
