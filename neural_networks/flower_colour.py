@@ -1,8 +1,23 @@
 import imp
 
+from keras.preprocessing.image import ImageDataGenerator
+
 pyvec_api = imp.load_source('api', './pyvec/pyvec/core/api.py')
 
+def augment_data(train_data):
+    augmented_data_generator = ImageDataGenerator(
+        rotation_range=20,
+        horizontal_flip=True
+    )
+
+    augmented_data_generator.fit(train_data)
+    return augmented_data_generator
+
 def create_model():
+    pass
+
+
+def train_model_and_test():
     pass
 
 
@@ -15,3 +30,5 @@ if __name__ == "__main__":
     split = 0.9 # 90% of the dataset used for training, leaving 10% out for testing
 
     (train_data, train_label), (test_data, test_label) = pyvec_api.load_images_with_tsv(pictures_directory, labels, input_size[0], input_size[1], split)
+
+    augmented_data_generator = augment_data(train_data)
