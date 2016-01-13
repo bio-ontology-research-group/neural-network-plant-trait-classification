@@ -1,0 +1,3 @@
+[submodule "neural_networks/pyvec"]
+	path = neural_networks/pyvec
+	url = https://github.com/KeironO/pyvec
