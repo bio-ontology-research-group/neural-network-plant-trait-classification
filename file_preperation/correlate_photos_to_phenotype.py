@@ -44,6 +44,11 @@ def list_to_csv_file(trait, trait_file_and_list):
     for files in trait_file_and_list:
         csv_writer.writerow(files)
 
+def get_download_links(photos_file):
+    save_file = open("./download_links.txt", "wb")
+    for photos in photos_file:
+        save_file.writelines("%s\n" % photos[3])
+
 if __name__ == "__main__":
     trait = "Flower - Colour"
 
@@ -56,7 +61,8 @@ if __name__ == "__main__":
 
     # Loading in the photos file
     photos_file = load_tsv(("./files_to_parse/photos.csv"))
-
+    # If you don't have the download links then uncomment the following line.
+    # get_download_links(photos_file)
     # Correlating the photo ID to the trait ID
     trait_and_file_list = correlate_photos_file_to_traits_info(photos_file, traits_dict)
 
