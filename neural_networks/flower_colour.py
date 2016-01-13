@@ -4,7 +4,7 @@ from keras.models import Sequential
 from keras.layers.core import Flatten, Dense, Dropout, Activation
 from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D
 from keras.optimizers import SGD
-from keras.utils import np_utils
+from keras.utils import np_utils, generic_utils
 
 from keras.preprocessing.image import ImageDataGenerator
 
@@ -74,7 +74,6 @@ def create_model(input_size, number_of_classes):
     model.add(Convolution2D(512, 3, 3))
     model.add(Activation("relu"))
 
-
     model.add(MaxPooling2D((2,2), strides=(2,2)))
 
     model.add(Flatten())
@@ -93,8 +92,12 @@ def create_model(input_size, number_of_classes):
     model.compile(loss="multiple_crossentropy", optimizer=sgd)
     return model
 
-def train_model_and_test():
-    pass
+def train_model_and_test(number_of_epochs, train_data, train_label, augmented_data_generator):
+    for e in range(number_of_epochs):
+        progress_bar = generic_utils.Progbar(train_data.shape[0])
+        for train_d_batch, train_l_batch in augmented_data_generator(train_data):
+            score = model.train_on_batch(train_d_batch, train_l_batch)
+            progress_bar.add(train_d_batch[0], values=[('train loss', score[0])])
 
 
 
@@ -104,6 +107,7 @@ if __name__ == "__main__":
 
     input_size = (224, 224)
     split = 0.9 # 90% of the dataset used for training, leaving 10% out for testing
+    number_of_epochs = 20
 
     (train_data, train_label), (test_data, test_label) = pyvec_api.load_images_with_tsv(pictures_directory, labels, input_size[0], input_size[1], split)
     number_of_classes = len(set(train_label))
@@ -111,3 +115,5 @@ if __name__ == "__main__":
     augmented_data_generator = augment_data(train_data)
 
     model = create_model(input_size, number_of_classes)
+
+    train_model_and_test(number_of_epochs, train_data, train_label, augmented_data_generator)
