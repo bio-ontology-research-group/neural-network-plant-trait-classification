@@ -1,4 +1,4 @@
-import imp
+import imp, numpy as np
 
 from keras.models import Sequential
 from keras.layers.core import Flatten, Dense, Dropout, Activation
@@ -59,15 +59,30 @@ def create_model(input_size, number_of_classes):
     return model
 
 def train_model_and_test(number_of_epochs, number_of_classes, train_data, train_label, augmented_data_generator):
-    train_label = np_utils.to_categorical(train_label, number_of_classes)
+    train_label = to_categorical(train_label, number_of_classes)
 
     for e in range(number_of_epochs):
         progress_bar = generic_utils.Progbar(train_data.shape[0])
-        for train_d_batch, train_l_batch in augmented_data_generator(train_data, train_label):
+        for train_d_batch, train_l_batch in augmented_data_generator.flow(train_data, train_label):
             score = model.train_on_batch(train_d_batch, train_l_batch)
-            progress_bar.add(train_d_batch[0], values=[('train loss', score[0])])
+            progress_bar.add(train_d_batch.shape[0], values=[('train loss', score[0])])
 
 
+
+def to_categorical(y, nb_classes=None):
+    '''Convert class vector (integers from 0 to nb_classes)
+    to binary class matrix, for use with categorical_crossentropy.
+    '''
+    y = np.asarray(y, dtype='a16')
+    for i, labels in enumerate(y):
+        y[i] = "".join(str(ord(char)) for char in y[i])
+    y = np.asarray(y, dtype='float32')
+    if not nb_classes:
+        nb_classes = np.max(y)+1
+    Y = np.zeros((len(y), nb_classes))
+    for i in range(len(y)):
+        Y[i] = 1.
+    return Y
 
 if __name__ == "__main__":
     pictures_directory = "/home/keo7/Pictures/plant_images" # The directory containing ALL of the plant images.
