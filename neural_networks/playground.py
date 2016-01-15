@@ -15,39 +15,32 @@ def augment_data(train_data):
         rotation_range=20,
         horizontal_flip=True
     )
-
     augmented_data_generator.fit(train_data)
     return augmented_data_generator
 
 def create_model(input_size, number_of_classes):
     model = Sequential()
 
-    model.add(ZeroPadding2D((1,1), input_shape=(3, input_size[0], input_size[1])))
+    model.add(Convolution2D(32, 3, 3, input_shape=(3, input_size[0], input_size[1])))
+    model.add(Activation("relu"))
+    model.add(Convolution2D(32, 3, 3))
+    model.add(Activation("relu"))
+    model.add(MaxPooling2D((2,2), strides=(1,1)))
+
+    model.add(Convolution2D(64, 3, 3))
+    model.add(Activation("relu"))
+    model.add(ZeroPadding2D((1,1)))
     model.add(Convolution2D(64, 3, 3))
     model.add(Activation("relu"))
 
-    model.add(ZeroPadding2D((1,1)))
-
-    model.add(Convolution2D(64, 3, 3))
-    model.add(Activation("relu"))
-
-    model.add(MaxPooling2D((2,2), strides=(2,2)))
-
-    model.add(ZeroPadding2D((1,1)))
-    model.add(Convolution2D(128, 3, 3))
-    model.add(Activation("relu"))
-    model.add(ZeroPadding2D((1,1)))
-    model.add(Convolution2D(128, 3, 3))
-    model.add(Activation("relu"))
-
-    model.add(MaxPooling2D((2,2), strides=(2,2)))
+    model.add(MaxPooling2D((2,2), strides=(1,1)))
 
     model.add(Flatten())
-    model.add(Dense(4096,))
+    model.add(Dense(2048))
     model.add(Activation("relu"))
     model.add(Dropout(0.5))
 
-    model.add(Dense(4096))
+    model.add(Dense(1024))
     model.add(Activation("relu"))
     model.add(Dropout(0.5))
 
@@ -64,8 +57,8 @@ def train_model_and_test(number_of_epochs, number_of_classes, train_data, train_
     for e in range(number_of_epochs):
         progress_bar = generic_utils.Progbar(train_data.shape[0])
         for train_d_batch, train_l_batch in augmented_data_generator.flow(train_data, train_label):
-            score = model.train_on_batch(train_d_batch, train_l_batch)
-            progress_bar.add(train_d_batch.shape[0], values=[('train loss', score[0])])
+            score = model.train_on_batch(train_d_batch, train_l_batch, accuracy=True)
+            progress_bar.add(train_d_batch.shape[0], values=[('train accuracy', score[1])])
 
 
 
@@ -88,7 +81,7 @@ if __name__ == "__main__":
     pictures_directory = "/home/keo7/Pictures/plant_images" # The directory containing ALL of the plant images.
     labels = "../file_preperation/labels/small_file.tsv" # The tsv file of which contains the image name and its correlated label. (correlate_photos_to_phenotype.py)
 
-    input_size = (28,28)
+    input_size = (64,64)
     split = 0.8 # 90% of the dataset used for training, leaving 10% out for testing
     number_of_epochs = 20
 
