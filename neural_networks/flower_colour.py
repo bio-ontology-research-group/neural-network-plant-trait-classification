@@ -10,7 +10,7 @@ from keras.callbacks import  History, ModelCheckpoint, EarlyStopping
 from sklearn.metrics import confusion_matrix, classification_report, auc, roc_curve
 from keras import backend as K
 from sklearn.cross_validation import StratifiedKFold
-
+import matplotlib.pyplot as plt
 
 pyvec_api = imp.load_source('api', './pyvec/pyvec/core/api.py')
 
@@ -18,8 +18,9 @@ def create_model(input_size, number_of_classes):
     model = Sequential()
 
     model.add(Convolution2D(32, 3, 3, border_mode="same", input_shape=(3, input_size, input_size)))
-    model.add(Activation("relu"))
-
+    # For visualisation purposes
+    convout1 = Activation('relu')
+    model.add(convout1)
 
     model.add(Flatten())
     model.add(Dense(128))
@@ -30,13 +31,13 @@ def create_model(input_size, number_of_classes):
 
     o = SGD()
     model.compile(loss="categorical_crossentropy", optimizer=o)
-    return model
+    return model, convout1
 
 
 def train_model(model, train_data, train_label, number_of_classes):
     train_label = to_categorical(train_label, number_of_classes)
     early_stopper = EarlyStopping(monitor="val_loss", patience=100)
-    model.fit(train_data, train_label, batch_size=32, nb_epoch=1000, verbose=1, validation_split=0.1, callbacks=[early_stopper])
+    model.fit(train_data, train_label, batch_size=32, nb_epoch=18, verbose=1, validation_split=0.1, callbacks=[early_stopper])
 
     return model
 
@@ -47,9 +48,6 @@ def evaluate_model(test_data):
     return pred_prob, predictions
 
 def to_categorical(y, nb_classes=None):
-    '''Convert class vector (integers from 0 to nb_classes)
-    to binary class matrix, for use with categorical_crossentropy.
-    '''
     y = np.asarray(y, dtype='a16')
     for i, labels in enumerate(y):
         y[i] = "".join(str(ord(char)) for char in y[i])
@@ -61,6 +59,16 @@ def to_categorical(y, nb_classes=None):
         Y[i] = 1.
     return Y
 
+def visualise_first_layer(model, convout1, test_data):
+    get_layer_output = K.function([model.layers[0].input], [convout1.get_output(train=False)])
+    layer_output = get_layer_output([test_data])[0]
+
+    plt.imshow(layer_output[0,0,:])
+    plt.show()
+
+def metrics(all_pred_prob, all_predictions, all_test_labels):
+    pass
+
 if __name__ == "__main__":
     pictures_directory = "/home/keo7/Pictures/small_plant_images" # The directory containing ALL of the plant images.
     labels = "../file_preperation/labels/small_file.tsv" # The tsv file of which contains the image name and its correlated label. (correlate_photos_to_phenotype.py)
@@ -70,9 +78,20 @@ if __name__ == "__main__":
     (data, labels), (__,__) = pyvec_api.load_images_with_tsv(pictures_directory, labels, input_size[0], input_size[1], 1)
     number_of_classes = len(set(labels))
 
+    all_pred_prob = []
+    all_predictions = []
+    all_test_labels = []
+
     model = None
     stratified_k_fold = StratifiedKFold(labels, n_folds=10, shuffle=True)
     for i,(train, test) in enumerate(stratified_k_fold):
-        model = create_model(input_size[0], number_of_classes)
+        model, convout1 = create_model(input_size[0], number_of_classes)
         model = train_model(model, data[train], labels[train], number_of_classes)
         pred_prob, predictions = evaluate_model(data[test])
+        all_pred_prob.extend(pred_prob)
+        all_predictions.extend(predictions)
+        all_test_labels.extend(labels[test])
+        break
+
+    visualise_first_layer(model, convout1, data[train])
+    metrics(all_pred_prob, all_predictions, all_test_labels)
