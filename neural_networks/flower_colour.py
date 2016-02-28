@@ -17,10 +17,12 @@ pyvec_api = imp.load_source('api', './pyvec/pyvec/core/api.py')
 def create_model(input_size, number_of_classes):
     model = Sequential()
 
-    model.add(Convolution2D(32, 3, 3, border_mode="same", input_shape=(3, input_size, input_size)))
+    model.add(Convolution2D(32, 3, 3, border_mode="valid", input_shape=(3, input_size, input_size)))
     # For visualisation purposes
     convout1 = Activation('relu')
     model.add(convout1)
+
+    model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Flatten())
     model.add(Dense(128))
@@ -37,7 +39,7 @@ def create_model(input_size, number_of_classes):
 def train_model(model, train_data, train_label, number_of_classes):
     train_label = to_categorical(train_label, number_of_classes)
     early_stopper = EarlyStopping(monitor="val_loss", patience=100)
-    model.fit(train_data, train_label, batch_size=32, nb_epoch=18, verbose=1, validation_split=0.1, callbacks=[early_stopper])
+    model.fit(train_data, train_label, batch_size=32, nb_epoch=1000, verbose=1, validation_split=0.1, callbacks=[early_stopper])
 
     return model
 
@@ -70,8 +72,8 @@ def metrics(all_pred_prob, all_predictions, all_test_labels):
     pass
 
 if __name__ == "__main__":
-    pictures_directory = "/home/keo7/Pictures/small_plant_images" # The directory containing ALL of the plant images.
-    labels = "../file_preperation/labels/small_file.tsv" # The tsv file of which contains the image name and its correlated label. (correlate_photos_to_phenotype.py)
+    pictures_directory = "/home/keo7/Pictures/plant_images" # The directory containing ALL of the plant images.
+    labels = "../file_preperation/labels/file.tsv" # The tsv file of which contains the image name and its correlated label. (correlate_photos_to_phenotype.py)
 
     input_size = (28, 28)
 
@@ -91,7 +93,6 @@ if __name__ == "__main__":
         all_pred_prob.extend(pred_prob)
         all_predictions.extend(predictions)
         all_test_labels.extend(labels[test])
-        break
+        visualise_first_layer(model, convout1, data[train])
 
-    visualise_first_layer(model, convout1, data[train])
     metrics(all_pred_prob, all_predictions, all_test_labels)
