@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
     input_size = (28, 28)
 
-    (data, labels), (__,__) = load_images_using_tsv(pictures_directory, labels, input_size[0], input_size[1])
+    data, labels= load_images_using_tsv(pictures_directory, labels, input_size[0], input_size[1])
     number_of_classes = len(set(labels))
     print "Data loaded in shape of:", data.shape
     all_pred_prob = []
