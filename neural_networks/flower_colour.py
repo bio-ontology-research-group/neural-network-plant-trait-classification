@@ -36,10 +36,14 @@ def load_images_using_tsv(directory, tsv_file, height, width):
     data.flatten()
     labels = np.empty((number_of_images, ), dtype=np.dtype("a16"))
     for i, details in enumerate(labels_file_name):
-        vectored_image = vectorise_image(directory, details[1], height, width)
-        data[i,:,:,:] = [vectored_image[:,:,0]/255,vectored_image[:,:,1]/255,vectored_image[:,:,2]/255]
-        labels[i] = details[0]
-    return data, labels
+        # THIS IS FOR MY LAPTOP, PLEASE DON'T DO THIS.
+        if i < 1000: # Just limiting it to the first 500 as to test on my laptop.
+            vectored_image = vectorise_image(directory, details[1], height, width)
+            data[i,:,:,:] = [vectored_image[:,:,0],vectored_image[:,:,1],vectored_image[:,:,2]]
+            labels[i] = details[0]
+        else:
+            break
+    return data[:1000], labels[:1000]
 
 def create_model(input_size, number_of_classes):
     model = Sequential()
@@ -65,8 +69,8 @@ def create_model(input_size, number_of_classes):
 
 def train_model(model, train_data, train_label, number_of_classes):
     train_label = to_categorical(train_label, number_of_classes)
-    early_stopper = EarlyStopping(monitor="val_loss", patience=100)
-    model.fit(train_data, train_label, batch_size=32, nb_epoch=1000, verbose=1, validation_split=0.1, callbacks=[early_stopper])
+    early_stopper = EarlyStopping(monitor="val_loss", patience=5)
+    model.fit(train_data, train_label, batch_size=32, nb_epoch=1, verbose=1, validation_split=0.1, callbacks=[early_stopper])
 
     return model
 
@@ -80,7 +84,7 @@ def to_categorical(y, nb_classes=None):
     y = np.asarray(y, dtype='a16')
     for i, labels in enumerate(y):
         y[i] = "".join(str(ord(char)) for char in y[i])
-    y = np.asarray(y, dtype='float32')
+    y = np.asarray(y, dtype='a16')
     if not nb_classes:
         nb_classes = np.max(y)+1
     Y = np.zeros((len(y), nb_classes))
@@ -92,7 +96,10 @@ def visualise_first_layer(model, convout1, test_data):
     get_layer_output = K.function([model.layers[0].input], [convout1.get_output(train=False)])
     layer_output = get_layer_output([test_data])[0]
 
-    plt.imshow(layer_output[0,0,:])
+    f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
+
+    ax1.imshow(layer_output[0,0,:])
+    ax2.imshow(np.swapaxes(data[0], 0, 2))
     plt.show()
 
 def metrics(all_pred_prob, all_predictions, all_test_labels):
