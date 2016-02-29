@@ -4,7 +4,6 @@ from keras.models import Sequential
 from keras.layers.core import Flatten, Dense, Dropout, Activation
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD
-from keras.utils import np_utils, generic_utils
 
 from keras.callbacks import  History, ModelCheckpoint, EarlyStopping
 from sklearn.metrics import confusion_matrix, classification_report, auc, roc_curve
@@ -17,7 +16,7 @@ pyvec_api = imp.load_source('api', './pyvec/pyvec/core/api.py')
 def create_model(input_size, number_of_classes):
     model = Sequential()
 
-    model.add(Convolution2D(32, 3, 3, border_mode="valid", input_shape=(3, input_size, input_size)))
+    model.add(Convolution2D(16, 4, 4, border_mode="valid", input_shape=(3, input_size, input_size)))
     # For visualisation purposes
     convout1 = Activation('relu')
     model.add(convout1)
