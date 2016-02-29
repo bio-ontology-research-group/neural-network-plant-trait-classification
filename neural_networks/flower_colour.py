@@ -1,4 +1,5 @@
-import imp, numpy as np
+import csv, numpy as np, os
+from PIL import Image
 
 from keras.models import Sequential
 from keras.layers.core import Flatten, Dense, Dropout, Activation
@@ -11,7 +12,34 @@ from keras import backend as K
 from sklearn.cross_validation import StratifiedKFold
 import matplotlib.pyplot as plt
 
-pyvec_api = imp.load_source('api', './pyvec/pyvec/core/api.py')
+def load_labels_and_file_name(tsv_file, directory):
+    tsv_list = []
+    with open(tsv_file, "rb") as tsv:
+        reader = csv.reader(tsv, delimiter="\t", lineterminator="\n")
+        for files in reader:
+            if os.path.isfile(directory+"/"+files[1]) == True:
+                tsv_list.append(files)
+            else:
+                print "Not found!"
+        return tsv_list
+
+def vectorise_image(directory, file_name, height, width):
+    loaded_image = Image.open(directory+"/"+file_name)
+    loaded_image = loaded_image.resize((height, width), Image.ANTIALIAS)
+    vectored_image = np.asarray(loaded_image, dtype="float32")
+    return vectored_image
+
+def load_images_using_tsv(directory, tsv_file, height, width):
+    labels_file_name = load_labels_and_file_name(tsv_file, directory)
+    number_of_images = len(labels_file_name)
+    data = np.empty((number_of_images, 3, height, width), dtype="float32")
+    data.flatten()
+    labels = np.empty((number_of_images, ), dtype=np.dtype("a16"))
+    for i, details in enumerate(labels_file_name):
+        vectored_image = vectorise_image(directory, details[1], height, width)
+        data[i,:,:,:] = [vectored_image[:,:,0]/255,vectored_image[:,:,1]/255,vectored_image[:,:,2]/255]
+        labels[i] = details[0]
+    return data, labels
 
 def create_model(input_size, number_of_classes):
     model = Sequential()
@@ -76,9 +104,9 @@ if __name__ == "__main__":
 
     input_size = (28, 28)
 
-    (data, labels), (__,__) = pyvec_api.load_images_with_tsv(pictures_directory, labels, input_size[0], input_size[1], 1)
+    (data, labels), (__,__) = load_images_using_tsv(pictures_directory, labels, input_size[0], input_size[1])
     number_of_classes = len(set(labels))
-
+    print "Data loaded in shape of:", data.shape
     all_pred_prob = []
     all_predictions = []
     all_test_labels = []
