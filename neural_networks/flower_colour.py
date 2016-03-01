@@ -71,7 +71,7 @@ def create_model(input_size, number_of_classes):
 def train_model(model, train_data, train_label, number_of_classes):
     train_label = to_categorical(train_label, number_of_classes)
     datagen = generate_datagen(data[train])
-    early_stopper = EarlyStopping(monitor="lossu", patience=15)
+    early_stopper = EarlyStopping(monitor="val_loss", patience=15)
 
     model.fit_generator(datagen.flow(train_data, train_label,
                                      batch_size=32), samples_per_epoch=train_data.shape[0],
@@ -126,8 +126,6 @@ def generate_datagen(train_data):
         horizontal_flip=True,  # randomly flip images
         vertical_flip=False)  # randomly flip images
 
-    # compute quantities required for featurewise normalization
-    # (std, mean, and principal components if ZCA whitening is applied)
     datagen.fit(train_data)
 
     return datagen
