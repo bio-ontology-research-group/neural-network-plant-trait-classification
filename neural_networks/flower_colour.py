@@ -5,7 +5,7 @@ from keras.models import Sequential
 from keras.layers.core import Flatten, Dense, Dropout, Activation
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.optimizers import SGD
-
+from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import  History, ModelCheckpoint, EarlyStopping
 from sklearn.metrics import confusion_matrix, classification_report, auc, roc_curve
 from keras import backend as K
@@ -37,22 +37,23 @@ def load_images_using_tsv(directory, tsv_file, height, width):
     labels = np.empty((number_of_images, ), dtype=np.dtype("a16"))
     for i, details in enumerate(labels_file_name):
         # THIS IS FOR MY LAPTOP, PLEASE DON'T DO THIS.
-        if i < 1000: # Just limiting it to the first 500 as to test on my laptop.
+        if i < 2000: # Just limiting it to the first 500 as to test on my laptop.
             vectored_image = vectorise_image(directory, details[1], height, width)
-            data[i,:,:,:] = [vectored_image[:,:,0],vectored_image[:,:,1],vectored_image[:,:,2]]
+            data[i,:,:,:] = [vectored_image[:,:,0]/255,vectored_image[:,:,1]/255,vectored_image[:,:,2]/255]
             labels[i] = details[0]
         else:
             break
-    return data[:1000], labels[:1000]
+    return data[:2000], labels[:2000]
 
 def create_model(input_size, number_of_classes):
     model = Sequential()
 
-    model.add(Convolution2D(16, 4, 4, border_mode="valid", input_shape=(3, input_size, input_size)))
+    model.add(Convolution2D(32, 4, 4, border_mode="valid", input_shape=(3, input_size, input_size)))
     # For visualisation purposes
     convout1 = Activation('relu')
     model.add(convout1)
-
+    model.add(Convolution2D(32, 4, 4))
+    model.add(Activation("relu"))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Flatten())
@@ -69,9 +70,16 @@ def create_model(input_size, number_of_classes):
 
 def train_model(model, train_data, train_label, number_of_classes):
     train_label = to_categorical(train_label, number_of_classes)
-    early_stopper = EarlyStopping(monitor="val_loss", patience=5)
-    model.fit(train_data, train_label, batch_size=32, nb_epoch=1, verbose=1, validation_split=0.1, callbacks=[early_stopper])
+    datagen = generate_datagen(data[train])
+    early_stopper = EarlyStopping(monitor="lossu", patience=15)
 
+    model.fit_generator(datagen.flow(train_data, train_label,
+                                     batch_size=32), samples_per_epoch=train_data.shape[0],
+                                     nb_epoch=1000,
+                                     verbose=1,
+                                     validation_split=0.1,
+                                     callbacks=[early_stopper],
+                                     nb_worker=1)
     return model
 
 def evaluate_model(test_data):
@@ -104,6 +112,25 @@ def visualise_first_layer(model, convout1, test_data):
 
 def metrics(all_pred_prob, all_predictions, all_test_labels):
     pass
+
+def generate_datagen(train_data):
+    datagen = ImageDataGenerator(
+        featurewise_center=False,  # set input mean to 0 over the dataset
+        samplewise_center=False,  # set each sample mean to 0
+        featurewise_std_normalization=False,  # divide inputs by std of the dataset
+        samplewise_std_normalization=False,  # divide each input by its std
+        zca_whitening=False,  # apply ZCA whitening
+        rotation_range=0,  # randomly rotate images in the range (degrees, 0 to 180)
+        width_shift_range=0.2,  # randomly shift images horizontally (fraction of total width)
+        height_shift_range=0.2,  # randomly shift images vertically (fraction of total height)
+        horizontal_flip=True,  # randomly flip images
+        vertical_flip=False)  # randomly flip images
+
+    # compute quantities required for featurewise normalization
+    # (std, mean, and principal components if ZCA whitening is applied)
+    datagen.fit(train_data)
+
+    return datagen
 
 if __name__ == "__main__":
     pictures_directory = "/home/keo7/Pictures/plant_images" # The directory containing ALL of the plant images.
